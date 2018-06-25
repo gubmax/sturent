@@ -1,0 +1,13 @@
+.block {
+  padding: 40px 0;
+  text-align: center;
+}
+.code {
+  font-size: 100px;
+  line-height: 1em;
+  margin-bottom: 24px;
+}
+.title {
+  font-size: 40px;
+  line-height: 1em;
+}

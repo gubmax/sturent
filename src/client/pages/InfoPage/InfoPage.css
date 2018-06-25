@@ -1,0 +1,52 @@
+@import '../../styles/_media.css';
+
+h2.title {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 22px;
+  line-height: 1em;
+  font-weight: 500;
+}
+h3.title {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+  line-height: 1em;
+  font-weight: 500;
+}
+.list {
+  list-style-type: none;
+}
+.list > li {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+.listStyle {
+  position: relative;
+}
+.listStyle:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  left: -20px;
+  top: 50%;
+  border: 2px solid var(--accent_light);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.block {
+  overflow: auto;
+  margin-bottom: 20px;
+  padding: 20px var(--v-margin_mobile);
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+@media (--big-viewport) {
+  .block {
+    padding: 20px var(--v-margin_desktop);
+  }
+}

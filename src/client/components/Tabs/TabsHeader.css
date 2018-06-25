@@ -1,0 +1,5 @@
+.header {
+  display: inline-flex;
+  background: var(--accent_bg);
+  border-radius: 24px;
+}

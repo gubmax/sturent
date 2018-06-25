@@ -1,0 +1,15 @@
+{
+	"API_PREFIX": "/api",
+	"SERVER_PORT": 8000,
+	"DB": {
+		"NAME": "portfolio",
+		"HOST": "localhost",
+		"PORT": 27017
+	},
+	"JWT_SECRET": "jnf05Wf5dZPsgNz55dfg",
+	"VK": {
+		"id": "5906974",
+		"secret": "Rh1neVWWq5NQTt6tsXFV",
+		"callback": "/auth/vkontakte/callback"
+	}
+}

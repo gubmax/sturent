@@ -1,0 +1,48 @@
+.list {
+  max-width: inherit;
+  padding: 8px 0;
+  text-align: left;
+  cursor: default;
+}
+.list > li {
+  display: block;
+  text-decoration: none;
+}
+.separator {
+  margin: 0 8px;
+  border-top: 1px solid var(--border);
+}
+.item {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  margin: 8px;
+  padding: 14px 20px;
+  line-height: 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: inherit;
+  transition: background .2s;
+	border-right: 4px transparent solid;
+  &:hover {
+    cursor: pointer;
+    user-select: none;
+  }
+  &:active {
+    background: var(--border);
+  }
+  &.isActive {
+    color: var(--accent);
+		background: var(--accent_bg);
+  }
+  &.isActive > i > svg {
+    fill: var(--accent);
+  }
+}
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+  width: 24px;
+  height: 24px;
+}

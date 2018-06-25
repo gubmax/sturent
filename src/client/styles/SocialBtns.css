@@ -1,0 +1,25 @@
+.socialBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 24px;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px var(--shadow_secondary);
+  overflow: hidden;
+}
+.socialBtn {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+  height: 40px;
+  color: var(--white);
+}
+.socialBtn_vk {
+  background: linear-gradient(0deg, #507299, color-mod(#507299 tint(20%)));
+}
+.socialBtn_google {
+  background: linear-gradient(0deg, #db4437, color-mod(#db4437 tint(20%)));
+}
+.socialBtn_facebook {
+  background: linear-gradient(0deg, #3b5998, color-mod(#3b5998 tint(20%)));
+}
