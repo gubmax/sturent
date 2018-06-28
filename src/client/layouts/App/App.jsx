@@ -1,15 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
-import Header from '../Header/Header.jsx';
-import Main from '../Main/Main.jsx';
-import Footer from '../Footer/Footer.jsx';
+import Header from '../Header/Header.jsx'
+import Main from '../Main/Main.jsx'
+import Footer from '../Footer/Footer.jsx'
 import Sidebar from '../Sidebar/Sidebar.jsx'
 import Modal from '../../containers/Modal/Modal.jsx'
 import Auth from '../../components/Auth/Auth.jsx'
 import Advert from '../../components/Adverts/Advert.jsx'
+import Loader from '../../components/Loader/Loader.jsx'
 
 import s from './App.css'
 
@@ -17,15 +18,20 @@ class ModalCSSTransition extends CSSTransition {
   onEntered = (node) => {
     /*Do not remove enter classes when active */
     if (!node) return
-
     node.nextSibling.style.overflow = 'auto'
   }
 }
 
 class App extends React.Component {
+  state = { loading: true }
+
 	componentWillReceiveProps(nextProps) {
 		this.prevLocation = this.props.location
 	}
+
+  componentDidMount() {
+    this.setState({ loading: false })
+  }
 
 	componentDidUpdate() {
 		let hash = this.props.location.hash.replace('#', '')
@@ -68,6 +74,12 @@ class App extends React.Component {
 
 		return (
 		  <div id={s.app}>
+        {
+          this.state.loading ?
+            <div className={s.loader} />
+          : null
+        }
+
 				<Header currLocation={currLocation.pathname} />
 
 				<TransitionGroup>
