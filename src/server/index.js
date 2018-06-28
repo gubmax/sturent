@@ -22,25 +22,22 @@ export default function serverRenderer(req, res) {
     const match = matchPath(req.path, route)
 
     if (match) {
+      let component = require(`../client/${route.componentName}.jsx`)
+
+      if (component.default)
+        component = component.default
+
+      componentNames.push(route.componentName)
       componentsPath.push(route.path)
 
-      if (route.container) {
-        let component = require(`../client/${route.componentName}.jsx`)
-
-        if (component.default)
-          component = component.default
-
-        componentNames.push(route.componentName)
-
-        if (typeof component.getInitialProps === 'function') {
-          promises.push(component.getInitialProps({
-            req,
-            res,
-            match,
-            store,
-            dispatch: store.dispatch,
-          }))
-        }
+      if (typeof component.getInitialProps === 'function') {
+        promises.push(component.getInitialProps({
+          req,
+          res,
+          match,
+          store,
+          dispatch: store.dispatch,
+        }))
       }
     }
     return match

@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import { node, string } from 'prop-types'
+import { node, string, func } from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 class ModalToggler extends Component {
 	static propTypes = {
 	  children: node.isRequired,
-    to: string.isRequired
+    to: string.isRequired,
+    onClick: func,
 	}
 
   onLinkClick() {
-    const { history, to } = this.props
+    const { history, to, onClick } = this.props
     const { top, right, left, bottom, width, height } = this.refs.link.getBoundingClientRect()
+
+    if (onClick) onClick()
 
     history.push({
       pathname: to,
@@ -27,7 +30,7 @@ class ModalToggler extends Component {
 
     return (
       <a className={className} to={to} ref="link" onClick={this.onLinkClick.bind(this)} >
-        { this.props.children }
+        { children }
       </a>
     )
 	}

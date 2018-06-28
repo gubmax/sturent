@@ -19,6 +19,12 @@ export function getCurrAdvert(id) {
   }
 }
 
+
+export const setCurrAdvert = (advert) => ({
+  type: 'CURR_ADVERT_SET',
+  payload: advert
+})
+
 export const removeCurrAdvert = () => ({
   type: 'CURR_ADVERT_REMOVE'
 })

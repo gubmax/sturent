@@ -75,8 +75,12 @@ class Advert extends Component {
   }
 
   render() {
-    let { advert, history, overlay } = this.props
+    const { history } = this.props
     const { inFavorites } = this.state
+    let { advert } = this.props
+    let content
+
+    if (!advert) advert = {}
 
     const whom = {
       female: 'Женщину',
@@ -100,26 +104,26 @@ class Advert extends Component {
     }
 
     return (
-      advert ?
-        <TransitionGroup>
-          <AdvertCSSTransition key={history.location.pathname}
-            classNames={transitionClasses}
-            timeout={400}
-            appear={history.action === 'PUSH'}>
-            {
-              history.location.pathname !== '/neighbors' ?
-                <div className={s.container}>
-                  { history.action === 'PUSH' ?
-                      <span className={s.backBtn} onClick={this.props.onClick}>
-                        <i className={i.icon}>
-                          <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + i.srIcon_light + ' ' + s.backBtn__icon}>
-                            <path d="M16.62,2.99L16.62,2.99c-0.49-0.49-1.28-0.49-1.77,0l-8.31,8.31c-0.39,0.39-0.39,1.02,0,1.41l8.31,8.31   c0.49,0.49,1.28,0.49,1.77,0h0c0.49-0.49,0.49-1.28,0-1.77L9.38,12l7.25-7.25C17.11,4.27,17.11,3.47,16.62,2.99z"/>
-                          </svg>
-                        </i>
-                      </span>
-                    : null
-                  }
+      <TransitionGroup>
+        <AdvertCSSTransition key={history.location.pathname}
+          classNames={transitionClasses}
+          timeout={400}
+          appear={history.action === 'PUSH'}>
+          {
+            history.location.pathname !== '/neighbors' ?
+              <div className={s.container}>
+                { history.action === 'PUSH' ?
+                    <span className={s.backBtn} onClick={this.props.onClick}>
+                      <i className={i.icon}>
+                        <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + i.srIcon_light + ' ' + s.backBtn__icon}>
+                          <path d="M16.62,2.99L16.62,2.99c-0.49-0.49-1.28-0.49-1.77,0l-8.31,8.31c-0.39,0.39-0.39,1.02,0,1.41l8.31,8.31   c0.49,0.49,1.28,0.49,1.77,0h0c0.49-0.49,0.49-1.28,0-1.77L9.38,12l7.25-7.25C17.11,4.27,17.11,3.47,16.62,2.99z"/>
+                        </svg>
+                      </i>
+                    </span>
+                  : null
+                }
 
+                <Fragment>
                   <div className={s.header + (!advert.img ? ' ' + c.header_withoutImg : '')}>
                     {
                       advert.img ?
@@ -202,7 +206,18 @@ class Advert extends Component {
                   </div>
 
                   <div className={s.text}>
-                    <p>{advert.text}</p>
+                    { advert.text ?
+                        <p>{advert.text}</p>
+                      : (
+                        <Fragment>
+                          <span className={s.text_dummy}></span>
+                          <span className={s.text_dummy}></span>
+                          <span className={s.text_dummy}></span>
+                          <span className={s.text_dummy}></span>
+                          <span className={s.text_dummy}></span>
+                        </Fragment>
+                      )
+                    }
                   </div>
 
                   <div className={s.userInfo}>
@@ -217,15 +232,15 @@ class Advert extends Component {
 
                     <div className={s.userInfo__info}>
                       <span className={s.userInfo__name}>Имя</span>
-                      <span className={s.userInfo__date}>{this.formatDate(new Date(advert.createdAt))}</span>
+                      <span className={s.userInfo__date + (!advert.createdAt ? ' ' + s.userInfo__date_dummy : '')}>{ advert.createdAt ? this.formatDate(new Date(advert.createdAt)) : ''}</span>
                     </div>
                   </div>
-                </div>
-              : <div />
-            }
-          </AdvertCSSTransition>
-        </TransitionGroup>
-      : <Loader />
+                </Fragment>
+              </div>
+            : <div />
+          }
+        </AdvertCSSTransition>
+      </TransitionGroup>
     )
   }
 }

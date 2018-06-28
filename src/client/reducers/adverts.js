@@ -13,8 +13,10 @@ export default (state = initialState, action) => {
 			return { ...state, current: action.payload }
 		case 'CURR_ADVERT_REQUEST_FAILURE':
 			return { ...state, current: undefined }
-		case 'CURR_ADVERT_REMOVE':
-			return { ...state, current: undefined }
+		case 'CURR_ADVERT_SET':
+			return { ...state, current: action.payload }
+    case 'CURR_ADVERT_REMOVE':
+      return { ...state, current: undefined }
     default:
       return state
   }

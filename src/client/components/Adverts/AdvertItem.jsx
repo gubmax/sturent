@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
+import { setCurrAdvert } from '../../actions/advertsActions'
 
 import c from './common.css'
 import s from './AdvertItem.css'
@@ -36,8 +38,14 @@ class AdvertItem extends Component {
     return str.join(', ')
   }
 
+  onItemClick() {
+    const { item, dispatch } = this.props
+
+    dispatch(setCurrAdvert(item))
+  }
+
   render() {
-    const { item } = this.props
+    const { item, dispatch } = this.props
 
     const whom = {
       female: 'Женщину',
@@ -55,7 +63,7 @@ class AdvertItem extends Component {
 
     return (
       <div className={s.item}>
-        <LinkToModal className={s.advert} to={'/advert/' + item._id}>
+        <LinkToModal className={s.advert} to={'/advert/' + item._id} onClick={this.onItemClick.bind(this)}>
           <div className={s.header + (!item.img ? ' ' + c.header_withoutImg : '')}>
             {
               item.img ?
@@ -127,5 +135,6 @@ class AdvertItem extends Component {
 
 export default compose(
   withRouter,
+  connect(null, null),
   withStyles(c, s, i)
 )(AdvertItem)

@@ -4,7 +4,7 @@ import '../models/AdvertModel';
 const Advert = mongoose.model('Advert');
 
 function listAdverts(req, res) {
-	Advert.find()
+	Advert.find({}, ('_id address latitude longitude pay pledge tenants whom rent tags img'))
 		.skip(parseInt(req.query.skip))
 		.limit(10)
 		.sort({createdAt: -1})

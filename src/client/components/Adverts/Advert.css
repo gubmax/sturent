@@ -8,6 +8,16 @@
   padding: 0 16px 12px;
 	transition: opacity .4s;
 }
+.text_dummy {
+  display: block;
+  height: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+  background: var(--light_2);
+}
+.text_dummy:last-of-type {
+  margin-right: 80px;
+}
 .header {
 	position: relative;
   height: 300px;
@@ -127,6 +137,14 @@
 .userInfo__date {
 	display: inline-block;
 	color: var(--secondary);
+}
+.userInfo__date_dummy {
+  display: block;
+  height: 1em;
+  width: 80px;
+  border-radius: 8px;
+  margin-bottom: 1em;
+  background: var(--light_2);
 }
 
 @media (--middle-viewport) {

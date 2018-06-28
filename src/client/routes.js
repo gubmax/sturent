@@ -8,7 +8,6 @@ module.exports = [
     path: '/neighbors',
     exact: true,
     componentName: 'pages/NeighborsPage/NeighborsPage',
-    container: true
   },
   {
     path: '/add',
@@ -44,6 +43,5 @@ module.exports = [
     path: '/advert/:id',
     exact: true,
     componentName: 'pages/AdvertPage/AdvertPage',
-    container: true
   },
 ];
