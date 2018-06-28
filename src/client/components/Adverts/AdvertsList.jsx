@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
@@ -7,11 +7,11 @@ import Loader from '../Loader/Loader.jsx'
 
 import s from './AdvertsList.css'
 
-class AdvertsList extends React.Component {
+class AdvertsList extends Component {
 	constructor(props) {
 		super(props)
 
-		const items = this.props.items
+		const { items } = this.props
 
 		this.state = {
 			items: items,
@@ -32,27 +32,28 @@ class AdvertsList extends React.Component {
 	}
 
 	onScroll() {
+    const { loading, skip, items, isLast } = this.state
 		let clientHeight = document.body.clientHeight,
 				listBottom = this.refs.list.getBoundingClientRect().bottom
 
-		if (listBottom - 200 > clientHeight || this.state.loading) return
+		if (listBottom - 200 > clientHeight || loading) return
 
 		this.setState({ loading: true })
 
-		axios(`${this.props.url}?skip=${this.state.skip}`).then(
+		axios(`${this.props.url}?skip=${skip}`).then(
 			done => {
-				let items = done.data
+				let data = done.data
 
-				if (!items.length) {
+				if (!data.length) {
 					window.removeEventListener('scroll', this.onScroll)
 					this.setState({ isLast: true })
 				}
 
-				items = [...this.state.items, ...items]
+				data = [...items, ...data]
 
 				this.setState({
-					items: items,
-					skip: items.length,
+					items: data,
+					skip: data.length,
 					loading: false
 				})
 			},
@@ -63,20 +64,22 @@ class AdvertsList extends React.Component {
 	}
 
 	render() {
+    const { loading, items, isLast } = this.state
+
 		return (
 			<div className={s.list} ref="list">
 				<div className={s.container}>
-        	{this.state.items.map((child, i) => {
+        	{items.map((child, i) => {
           	return <AdvertItem key={i} item={child} />
         	})}
 				</div>
 				{
-					this.state.loading ?
+					loading ?
 						<Loader className={s.loader} />
 					: null
 				}
 				{
-					this.state.isLast ?
+					isLast ?
 						<span className={s.msg}>Объявления закончились</span>
 					: null
 				}
