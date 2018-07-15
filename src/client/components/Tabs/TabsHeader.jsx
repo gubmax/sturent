@@ -1,38 +1,46 @@
-import React from 'react'
+import React, { Component, cloneElement } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
+
+import { setActiveTabIndex } from '../../actions/tabsActions'
 
 import s from './TabsHeader.css'
 
-class TabsHeader extends React.Component {
-	constructor() {
-		super()
-
-		this.state = { activeTabIndex: 0 }
-
-		this.renderChildren = this.renderChildren.bind(this)
-	}
-
+class TabsHeader extends Component {
 	handleClick(i) {
-		this.setState({ activeTabIndex: i })
+		this.props.setActiveTabIndex(i)
 	}
 
 	renderChildren() {
-		return React.Children.map(this.props.children, (child, i) => {
-			return React.cloneElement(child, {
-				isActive: i === this.state.activeTabIndex,
+		return this.props.children.map((child, i) => {
+			return cloneElement(child, {
+				key: i,
+				isActive: i === this.props.activeTabIndex,
 				onHandleClick: this.handleClick.bind(this, i)
-			});
-		});
+			})
+		})
 	}
 
 	render() {
 		return (
       <div className={s.header}>
-				{this.renderChildren()}
+				{ this.renderChildren() }
       </div>
 		)
 	}
 }
 
-export default withStyles(s)(TabsHeader)
+const mapStateToProps = state => ({
+	activeTabIndex: state.tabs.activeTabIndex
+})
+
+const mapDispatchToProps = ({
+	setActiveTabIndex
+})
+
+export default compose(
+	withStyles(s),
+	connect(mapStateToProps, mapDispatchToProps)
+)(TabsHeader)

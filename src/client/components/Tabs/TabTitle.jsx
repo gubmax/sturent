@@ -1,23 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { bool, string, func } from 'prop-types'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import s from './TabTitle.css'
 
-class TabsHeader extends React.Component {
+class TabsHeader extends Component {
+	static propTypes = {
+	  isActive: bool,
+	  text: string.isRequired,
+		onHandleClick: func,
+	}
+
 	render() {
+		const { isActive, onHandleClick, text, key } = this.props
+
 		return (
-      <div className={s.title + (this.props.isActive ? ' ' + s.isActive : '')}
-				onClick={this.props.onHandleClick}>
-				{this.props.text}
+      <div className={s.title + (isActive ? ' ' + s.isActive : '')}
+				onClick={onHandleClick}>
+				{ text }
 			</div>
 		)
 	}
-}
-
-TabsHeader.propTypes = {
-  isActive: PropTypes.bool,
-  text: PropTypes.string.isRequired
 }
 
 export default withStyles(s)(TabsHeader)
