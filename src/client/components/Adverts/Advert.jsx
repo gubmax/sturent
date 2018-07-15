@@ -210,11 +210,11 @@ class Advert extends Component {
                         <p>{advert.text}</p>
                       : (
                         <Fragment>
-                          <span className={s.text_dummy}></span>
-                          <span className={s.text_dummy}></span>
-                          <span className={s.text_dummy}></span>
-                          <span className={s.text_dummy}></span>
-                          <span className={s.text_dummy}></span>
+                          <span className={s.text_dummy + ' ' + s.dummy}></span>
+                          <span className={s.text_dummy + ' ' + s.dummy}></span>
+                          <span className={s.text_dummy + ' ' + s.dummy}></span>
+                          <span className={s.text_dummy + ' ' + s.dummy}></span>
+                          <span className={s.text_dummy + ' ' + s.dummy}></span>
                         </Fragment>
                       )
                     }
@@ -232,7 +232,7 @@ class Advert extends Component {
 
                     <div className={s.userInfo__info}>
                       <span className={s.userInfo__name}>Имя</span>
-                      <span className={s.userInfo__date + (!advert.createdAt ? ' ' + s.userInfo__date_dummy : '')}>{ advert.createdAt ? this.formatDate(new Date(advert.createdAt)) : ''}</span>
+                      <span className={s.userInfo__date + (!advert.createdAt ? ' ' + s.userInfo__date_dummy + ' ' + s.dummy : '')}>{ advert.createdAt ? this.formatDate(new Date(advert.createdAt)) : ''}</span>
                     </div>
                   </div>
                 </Fragment>

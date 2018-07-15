@@ -13,7 +13,6 @@
   height: 1em;
   border-radius: 8px;
   margin-bottom: 1em;
-  background: var(--light_2);
 }
 .text_dummy:last-of-type {
   margin-right: 80px;
@@ -144,7 +143,31 @@
   width: 80px;
   border-radius: 8px;
   margin-bottom: 1em;
-  background: var(--light_2);
+}
+.dummy {
+	position: relative;
+	overflow: hidden;
+}
+.dummy:before {
+	content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
+  width: 400%;
+  margin-left: -200%;
+  animation: dummyShimmer .8s linear infinite;
+	background: linear-gradient(to right, var(--light_2) 40%, var(--light) 50%, var(--light_2) 60%) 50% 50%;
+}
+@keyframes dummyShimmer {
+  from {
+    transform: translateX(-30%);
+  }
+  to {
+    transform: translateX(30%);
+  }
 }
 
 @media (--middle-viewport) {

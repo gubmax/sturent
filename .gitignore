@@ -1,4 +1,5 @@
 src/.ftpconfig
+src/node_modules/*
 
 src/server/bundle/*
 !src/server/bundle/.gitkeep
