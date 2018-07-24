@@ -10,6 +10,11 @@ module.exports = [
     componentName: 'pages/NeighborsPage/NeighborsPage',
   },
   {
+    path: '/neighbors/:id',
+    exact: true,
+    componentName: 'pages/AdvertPage/AdvertPage',
+  },
+  {
     path: '/add',
     exact: true,
     componentName: 'pages/AddPage/AddPage'
@@ -38,10 +43,5 @@ module.exports = [
     path: '/auth',
     exact: true,
     componentName: 'pages/AuthPage/AuthPage'
-  },
-  {
-    path: '/advert/:id',
-    exact: true,
-    componentName: 'pages/AdvertPage/AdvertPage',
   },
 ];

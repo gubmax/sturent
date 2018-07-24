@@ -63,7 +63,7 @@ class AdvertItem extends Component {
 
     return (
       <div className={s.item}>
-        <LinkToModal className={s.advert} to={'/advert/' + item._id} onClick={this.onItemClick.bind(this)}>
+        <LinkToModal className={s.advert} to={'/neighbors/' + item._id} onClick={this.onItemClick.bind(this)}>
           <div className={s.header + (!item.img ? ' ' + c.header_withoutImg : '')}>
             {
               item.img ?

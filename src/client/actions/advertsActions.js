@@ -12,7 +12,7 @@ export function getAdverts() {
 
 export function getCurrAdvert(id) {
   return dispatch => {
-    return axios(API_PREFIX + '/advert/' + id).then(
+    return axios(API_PREFIX + '/neighbors/' + id).then(
       done => dispatch({ type: 'CURR_ADVERT_REQUEST_SUCCESS', payload: done.data }),
       error => dispatch({ type: 'CURR_ADVERT_REQUEST_FAILURE', error }),
     )

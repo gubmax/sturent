@@ -102,9 +102,9 @@ class App extends React.Component {
 						appear>
 						<Switch location={isModal ? location : {}}>
 							<Route path="/auth" component={() => <Modal style={pos}><Auth/></Modal>} />
+            	<Route path="/neighbors/:id" component={({match}) => <Modal style={pos}><Advert match={match}/></Modal>} />
 							<Route path="/neighbors/filters" component={() => <Modal style={pos}></Modal>} />
 							<Route path="/rent/filters" component={() => <Modal style={pos}></Modal>} />
-							<Route path="/advert/:id" component={({match}) => <Modal style={pos}><Advert match={match}/></Modal>} />
 						</Switch>
 					</ModalCSSTransition>
 				</TransitionGroup>

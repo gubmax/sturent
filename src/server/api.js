@@ -21,6 +21,6 @@ router.route('/add/form')
   .post(Advert.createAdvert)
 
 router.get('/rent/adverts', Advert.listAdverts)
-router.get('/advert/:id', Advert.findAdvert)
+router.get('/neighbors/:id', Advert.findAdvert)
 
 module.exports = router
