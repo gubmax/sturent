@@ -9,7 +9,7 @@ import path from 'path'
 import routes from '../client/routes'
 import reducer from '../client/reducers/reducer'
 import template from '../client/template'
-import App from '../client/layouts/App/App.jsx'
+import AppRouter from '../client/serverRouter.jsx'
 import StylesProvider from '../client/containers/StylesProvider.jsx'
 
 export default function serverRenderer(req, res) {
@@ -22,12 +22,12 @@ export default function serverRenderer(req, res) {
     const match = matchPath(req.path, route)
 
     if (match) {
-      let component = require(`../client/${route.componentName}.jsx`)
+      let component = require(`${__dirname}/../client/pages/${route.componentName}/${route.componentName}.jsx`)
 
       if (component.default)
         component = component.default
 
-      componentNames.push(route.componentName)
+      componentNames.push('pages/' + route.componentName)
       componentsPath.push(route.path)
 
       if (typeof component.getInitialProps === 'function') {
@@ -53,11 +53,11 @@ export default function serverRenderer(req, res) {
     const context = { data }
     const body = renderToString(
       <Provider store={store}>
-        <StaticRouter context={context} location={req.url}>
-          <StylesProvider onInsertCss={ (...styles) => styles.forEach(style => css.add(style._getCss())) }>
-            <Route component={App} />
-          </StylesProvider>
-        </StaticRouter>
+        <StylesProvider onInsertCss={ (...styles) => styles.forEach(style => css.add(style._getCss())) }>
+          <StaticRouter context={context} location={req.url}>  
+            <AppRouter />
+          </StaticRouter>
+        </StylesProvider>
       </Provider>
     )
     const preloadedState = store.getState()

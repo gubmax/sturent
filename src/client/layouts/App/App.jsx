@@ -1,22 +1,26 @@
 import React, { Fragment } from 'react'
+import { withRouter } from 'react-router'
 import { Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import Header from '../Header/Header.jsx'
-import Main from '../Main/Main.jsx'
 import Footer from '../Footer/Footer.jsx'
 import Sidebar from '../Sidebar/Sidebar.jsx'
 import Modal from '../../containers/Modal/Modal.jsx'
 import Auth from '../../components/Auth/Auth.jsx'
+import ModalAuth from '../../components/Auth/ModalAuth.jsx'
 import Advert from '../../components/Adverts/Advert.jsx'
 import Loader from '../../components/Loader/Loader.jsx'
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.jsx'
 
 import s from './App.css'
 
 class ModalCSSTransition extends CSSTransition {
   onEntered = (node) => {
-    /*Do not remove enter classes when active */
+    /* Do not remove enter classes when active */
     if (!node) return
     node.nextSibling.style.overflow = 'auto'
   }
@@ -42,7 +46,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { location, history } = this.props
+		const { location, history, children, showPageLoader } = this.props
 
 		const isModal = !!(
 			history.action !== 'POP' &&
@@ -75,20 +79,30 @@ class App extends React.Component {
 		return (
 		  <div id={s.app}>
         {
-          this.state.loading ?
-            <div className={s.loader} />
-          : null
+          this.state.loading
+            ? <div className={s.loader}/>
+            : null
         }
 
 				<Header currLocation={currLocation.pathname} />
 
+        <div className={s.pageLoader + (showPageLoader ? ' ' + s.isShow : '')}>
+          <Loader className={s.pageLoader__icon} />
+        </div>
+
 				<TransitionGroup>
 					<CSSTransition key={currLocation.key}
 						classNames={pageClasses}
-						timeout={{enter: 250, exit: 200}}
+						timeout={250}
 						unmountOnExit>
 						<Fragment>
-							<Main location={currLocation} />
+              <main>
+                <Switch location={currLocation}>
+                  { children }
+                  <Route path='/auth' render={() => <AuthPage location={currLocation}><Auth /></AuthPage>} />
+                  <Route component={NotFoundPage} />
+                </Switch>
+              </main>
 							<Footer />
 						</Fragment>
 					</CSSTransition>
@@ -99,12 +113,12 @@ class App extends React.Component {
 						classNames={modalClasses}
 						timeout={400}
 						mountOnEnter
-						appear>
-						<Switch location={isModal ? location : {}}>
-							<Route path="/auth" component={() => <Modal style={pos}><Auth/></Modal>} />
-            	<Route path="/neighbors/:id" component={({match}) => <Modal style={pos}><Advert match={match}/></Modal>} />
-							<Route path="/neighbors/filters" component={() => <Modal style={pos}></Modal>} />
-							<Route path="/rent/filters" component={() => <Modal style={pos}></Modal>} />
+						appeart>
+						<Switch location={ isModal ? location : {} }>
+							<Route path="/auth" component={() => <Modal style={pos}><ModalAuth history={history} /></Modal>} />
+              <Route path="/neighbors/filters" exact component={ () => <Modal style={pos}></Modal> } />
+            	<Route path="/neighbors/:id" component={ ({match}) => <Modal style={pos}><Advert match={match}/></Modal> } />
+							<Route path="/rent/filters" component={ () => <Modal style={pos}></Modal> } />
 						</Switch>
 					</ModalCSSTransition>
 				</TransitionGroup>
@@ -114,9 +128,9 @@ class App extends React.Component {
 						classNames={sidebarClasses}
 						timeout={{enter: 250, exit: 200}}
 						unmountOnExit>
-						<Switch location={location}>
-							<Route path="/sidebar" component={() => <Sidebar currLocation={currLocation.pathname} />} />
-						</Switch>
+  						<Switch location={location}>
+  							<Route path="/sidebar" component={ () => <Sidebar currLocation={currLocation.pathname} history={history} /> } />
+  						</Switch>
 					</CSSTransition>
 				</TransitionGroup>
 			</div>
@@ -124,4 +138,12 @@ class App extends React.Component {
 	}
 }
 
-export default withStyles(s)(App)
+const mapStateToProps = state => ({
+	showPageLoader: state.app.showPageLoader
+})
+
+export default compose(
+  connect(mapStateToProps),
+  withRouter,
+  withStyles(s)
+)(App)

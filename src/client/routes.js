@@ -2,46 +2,46 @@ module.exports = [
   {
     path: '/',
     exact: true,
-    componentName: 'pages/HomePage/HomePage'
+    componentName: 'HomePage'
   },
   {
     path: '/neighbors',
     exact: true,
-    componentName: 'pages/NeighborsPage/NeighborsPage',
+    componentName: 'NeighborsPage',
   },
   {
     path: '/neighbors/:id',
     exact: true,
-    componentName: 'pages/AdvertPage/AdvertPage',
+    componentName: 'AdvertPage',
   },
   {
     path: '/add',
     exact: true,
-    componentName: 'pages/AddPage/AddPage'
+    componentName: 'AddPage'
   },
   {
     path: '/add/form',
     exact: true,
-    componentName: 'pages/AddFormPage/AddFormPage'
+    componentName: 'AddFormPage'
   },
   {
     path: '/info',
     exact: true,
-    componentName: 'pages/InfoPage/InfoPage'
+    componentName: 'InfoPage'
   },
   {
     path: '/favorites',
     exact: true,
-    componentName: 'pages/FavoritesPage/FavoritesPage'
+    componentName: 'FavoritesPage'
   },
   {
     path: '/contacts',
     exact: true,
-    componentName: 'pages/ContactsPage/ContactsPage'
+    componentName: 'ContactsPage'
   },
   {
     path: '/auth',
     exact: true,
-    componentName: 'pages/AuthPage/AuthPage'
+    componentName: 'AuthPage'
   },
 ];

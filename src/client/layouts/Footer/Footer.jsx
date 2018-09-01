@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
+
+import Link from '../../containers/AsyncLink.jsx'
 
 import s from './Footer.css'
 import w from '../../styles/Wrapper.css'

@@ -7,15 +7,8 @@ import { getAdverts } from '../actions/advertsActions'
 
 export default function withAdvert(WrapedComponent) {
   class AsyncComponent extends Component {
-    static async getInitialProps({ req, store, dispatch }) {
-      const action = getAdverts()
-
-      if (req)
-        await store.dispatch(action)
-      else
-        dispatch(action)
-
-      return
+    static async getInitialProps({ dispatch }) {
+      await dispatch(getAdverts())
     }
 
     componentWillMount() {
@@ -37,7 +30,7 @@ export default function withAdvert(WrapedComponent) {
   })
 
   return compose(
-    withRouter,
-    connect(mapStateToProps)
+    connect(mapStateToProps),
+    withRouter
   )(AsyncComponent)
 }

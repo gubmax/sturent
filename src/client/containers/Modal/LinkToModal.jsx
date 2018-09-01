@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { node, string, func } from 'prop-types'
-import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 class ModalToggler extends Component {

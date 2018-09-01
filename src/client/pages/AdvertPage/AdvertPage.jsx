@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
+import Link from '../../containers/AsyncLink.jsx'
 import Page from '../../layouts/Page/Page.jsx'
 import Advert from '../../components/Adverts/Advert.jsx'
 import withCurrAdvert from '../../containers/withCurrAdvert.jsx'

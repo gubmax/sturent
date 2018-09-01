@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import TabsHeader from '../Tabs/TabsHeader.jsx'
@@ -10,7 +10,7 @@ import i from '../../styles/Icon.css'
 import f from '../../styles/Form.css'
 import sb from '../../styles/SocialBtns.css'
 
-class Auth extends React.Component {
+class Auth extends Component {
 	render() {
     const { withoutHeader, className } = this.props
 

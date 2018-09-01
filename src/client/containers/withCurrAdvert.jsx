@@ -7,15 +7,8 @@ import { getCurrAdvert, removeCurrAdvert } from '../actions/advertsActions'
 
 export default function withAdvert(WrapedComponent) {
   class AsyncComponent extends Component {
-    static async getInitialProps({ req, store, dispatch, match }) {
-      const action = getCurrAdvert(match.params.id)
-
-      if (req)
-        await store.dispatch(action)
-      else
-        dispatch(action)
-
-      return
+    static async getInitialProps({ dispatch, match }) {
+      await dispatch(getCurrAdvert(match.params.id))
     }
 
     componentWillMount() {

@@ -1,0 +1,24 @@
+:root {
+  /* Colors */
+  --primary: #404040;
+  --secondary: #7c879e;
+  --accent: #4d67d2;
+  --accent_header: #5743ce;
+  --accent_light: color-mod(var(--accent) tint(25%));
+  --accent_bg: color-mod(var(--accent) alpha(14%));
+  --light: #f6f7fa;
+  --light_2: #eaedf3;
+  --white: #fff;
+  --border: #d8dde6;
+  --shadow: color-mod(var(--secondary) alpha(20%));
+	--shadow_accent: color-mod(var(--accent) alpha(60%));
+	--shadow_secondary: color-mod(var(--secondary) alpha(60%));
+  --red: #fd494c;
+  --pink: #f857a6;
+  /* Lengths */
+  --page-width: 776px;
+  --page-width_narrow: 480px;
+  --header-height: 56px;
+  --v-margin_desktop: 24px;
+  --v-margin_mobile: 16px;
+}

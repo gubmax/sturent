@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
+import Link from '../../containers/AsyncLink.jsx'
 import { showOverlay, hideOverlay } from '../../actions/overlayActions'
 
 import s from './Sidebar.css'
@@ -12,7 +12,7 @@ import l from '../../styles/List.css'
 import i from '../../styles/Icon.css'
 import lg from '../../styles/Logo.css'
 
-class Sidebar extends React.Component {
+class Sidebar extends Component {
 	componentDidMount() {
 		this.props.showOverlay()
 	}
@@ -122,8 +122,7 @@ const mapDispatchToProps = ({
 	hideOverlay
 })
 
-export default withStyles(s, o, l, i)(
-	withRouter(
-		connect(mapStateToProps, mapDispatchToProps)(Sidebar)
-	)
-)
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps),
+	withStyles(s, o, l, i)
+)(Sidebar)

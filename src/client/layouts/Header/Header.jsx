@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom'
-import { withRouter } from 'react-router'
+import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
+import Link from '../../containers/AsyncLink.jsx'
 import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
 import { setMarginForOverlay } from '../../actions/overlayActions'
 import { addToFavorites } from '../../actions/favoritesActions'
@@ -36,7 +37,6 @@ class Header extends React.Component {
 
 		if (!nextProps.overlay.showCounter) {
 			document.body.removeAttribute('style')
-			this.refs.header.removeAttribute('style')
 			return
 		}
 
@@ -59,7 +59,6 @@ class Header extends React.Component {
 		}
 
 		document.body.style.cssText = `margin-right: ${scrollWidth}px; overflow-y: hidden;`
-		this.refs.header.style.cssText = `margin-right: ${scrollWidth}px;`
 	}
 
 	handleShowHeader() {
@@ -88,7 +87,7 @@ class Header extends React.Component {
 		const { currLocation } = this.props
 
 		return (
-			<header className={this.state.headerState} ref="header">
+			<header className={this.state.headerState}>
 				<div className={w.wrapper + ' ' + s.wrapper}>
 					<Link to={{ pathname: "/sidebar", state: {sidebar: true} }} className={s.btn + " " + s.btn_sidebar}>
 						<i className={i.icon}>
@@ -141,8 +140,7 @@ const mapDispatchToProps = ({
 	addToFavorites
 })
 
-export default withStyles(s, w, i, l)(
-	withRouter(
-		connect(mapStateToProps, mapDispatchToProps)(Header)
-	)
-)
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps),
+	withStyles(s, w, i, l)
+)(Header)

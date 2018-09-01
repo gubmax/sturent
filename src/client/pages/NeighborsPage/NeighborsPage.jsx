@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
+import Link from '../../containers/AsyncLink.jsx'
 import Page from '../../layouts/Page/Page.jsx'
 import AdvertsList from '../../components/Adverts/AdvertsList.jsx'
 import Loader from '../../components/Loader/Loader.jsx'
@@ -13,7 +13,7 @@ import { API_PREFIX } from '../../../etc/config.json'
 import b from '../../styles/Button.css'
 import i from '../../styles/Icon.css'
 
-class Neighbors extends React.Component {
+class Neighbors extends Component {
 	render() {
 		const { adverts } = this.props
 		let content
@@ -50,10 +50,6 @@ class Neighbors extends React.Component {
 		)
 	}
 }
-
-const mapStateToProps = state => ({
-	adverts: state.adverts.list
-})
 
 export default compose(
   withAdverts,

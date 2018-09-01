@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 
 import Page from '../../layouts/Page/Page.jsx'
 import Textarea from '../../components/Textarea/Textarea.jsx'
 //import Form from '../components/Form.jsx'
 
-export default class AddFormPage extends React.Component {
+export default class AddFormPage extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {

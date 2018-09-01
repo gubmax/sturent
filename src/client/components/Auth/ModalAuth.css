@@ -1,0 +1,16 @@
+/* Transition */
+.appear {
+	opacity: .01;
+  &.appearActive {
+		opacity: 1;
+    transition: opacity .4s;
+  }
+}
+.exit {
+  opacity: 1;
+  &.exitActive  {
+		opacity: .01;
+    overflow: hidden;
+    transition: opacity .4s;
+  }
+}

@@ -16,7 +16,8 @@ export default ({ body, preloadedState, componentNames, css }) => `
 		window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
 		document.getElementById('state').remove();
 	</script>
-	<script async type="text/javascript" src="/js/bundle.js"></script>
+	<script type="text/javascript" src="/js/common.bundle.js" async></script>
+	${componentNames ? (componentNames.map(componentName => `<script type="text/javascript" src="/js/${componentName}.js" async></script>`)) : ''}
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500;subset=cyrillic" rel="stylesheet">
 	<!-- Styles -->

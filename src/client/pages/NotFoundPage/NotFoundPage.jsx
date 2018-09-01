@@ -11,7 +11,7 @@ function HomePage() {
 			content={
 				<div className={s.block}>
 					<p className={s.code}>404</p>
-					<p class={s.title}>Страница не найдена</p>
+					<p className={s.title}>Страница не найдена</p>
 				</div>
 			} />
 	)

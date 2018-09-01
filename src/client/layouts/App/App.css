@@ -1,27 +1,5 @@
-:root {
-  /* Colors */
-  --primary: #404040;
-  --secondary: #7c879e;
-  --accent: #4d67d2;
-  --accent_header: #5743ce;
-  --accent_light: color-mod(var(--accent) tint(25%));
-  --accent_bg: color-mod(var(--accent) alpha(14%));
-  --light: #f6f7fa;
-  --light_2: #eaedf3;
-  --white: #fff;
-  --border: #d8dde6;
-  --shadow: color-mod(var(--secondary) alpha(20%));
-	--shadow_accent: color-mod(var(--accent) alpha(60%));
-	--shadow_secondary: color-mod(var(--secondary) alpha(60%));
-  --red: #fd494c;
-  --pink: #f857a6;
-  /* Lengths */
-  --page-width: 776px;
-  --page-width_narrow: 480px;
-  --header-height: 56px;
-  --v-margin_desktop: 24px;
-  --v-margin_mobile: 16px;
-}
+@import '../../styles/_variables.css';
+
 /* Eric Meyers "Reset CSS" */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -59,12 +37,40 @@ a {
 	text-decoration: none;
 }
 #app {
+  position: relative;
 	height: inherit;
   color: var(--primary);
   font-family: "Roboto", -apple-system, BlinkMacSystemFont,"Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   -webkit-tap-highlight-color: transparent;
+}
+main {
+  padding-top: var(--header-height);
+}
+
+/* Page Loader */
+.pageLoader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: color-mod(var(--white) alpha(90%));
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s;
+  &.isShow {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.pageLoader__icon {
+	position: fixed !important;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /* Loader */
@@ -99,8 +105,8 @@ a {
 
 /* Page Transition */
 .pageEnter {
-  opacity: 0.01;
-  transform: scale(0.96);
+  opacity: .01;
+  transform: scale(.95);
   &.pageEnterActive {
     opacity: 1;
     transform: scale(1);
@@ -111,12 +117,8 @@ a {
 .pageExit {
   position: absolute;
   top: 0;
+  opacity: 0;
   width: 100%;
-  opacity: 1;
-  &.pageExitActive {
-    opacity: 0.01;
-    transition: opacity .2s;
-  }
 }
 
 /* Modal Transition */
