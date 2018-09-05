@@ -248,3 +248,36 @@
 		opacity: 0.01;
 	}
 }
+
+/* Favorites Transition */
+.favoritesEnter {
+  opacity: .01;
+	animation: bubble .3s forwards;
+  &.favoritesEnterActive {
+    opacity: 1;
+    transition: opacity .3s;
+		z-index: 1;
+  }
+}
+.favoritesExit {
+	position: absolute;
+	left: 0;
+  opacity: 1;
+	animation: bubble .3s forwards;
+  &.modalExitActive {
+    opacity: .01;
+    transition: opacity .3s;
+		z-index: 0;
+  }
+}
+@keyframes bubble {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+	100% {
+    transform: scale(1);
+  }
+}

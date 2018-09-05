@@ -7,9 +7,9 @@ import thunk from 'redux-thunk'
 import path from 'path'
 
 import routes from '../client/routes'
-import reducer from '../client/reducers/reducer'
+import reducer from '../client/redux/reducer'
 import template from '../client/template'
-import AppRouter from '../client/serverRouter.jsx'
+import AppRouter from '../client/routers/serverRouter.jsx'
 import StylesProvider from '../client/containers/StylesProvider.jsx'
 
 export default function serverRenderer(req, res) {
@@ -54,7 +54,7 @@ export default function serverRenderer(req, res) {
     const body = renderToString(
       <Provider store={store}>
         <StylesProvider onInsertCss={ (...styles) => styles.forEach(style => css.add(style._getCss())) }>
-          <StaticRouter context={context} location={req.url}>  
+          <StaticRouter context={context} location={req.url}>
             <AppRouter />
           </StaticRouter>
         </StylesProvider>

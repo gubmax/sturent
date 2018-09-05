@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import Auth from './Auth.jsx'

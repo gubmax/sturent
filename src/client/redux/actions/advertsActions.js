@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_PREFIX } from '../../etc/config.json'
+import { API_PREFIX } from '../../../etc/config.json'
 
 export function getAdverts() {
   return dispatch => {

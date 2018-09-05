@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -20,17 +20,20 @@ import s from './App.css'
 
 class ModalCSSTransition extends CSSTransition {
   onEntered = (node) => {
-    /* Do not remove enter classes when active */
     if (!node) return
     node.nextSibling.style.overflow = 'auto'
   }
 }
 
-class App extends React.Component {
+class App extends Component {
   state = { loading: true }
 
 	componentWillReceiveProps(nextProps) {
-		this.prevLocation = this.props.location
+    const { location } = this.props
+
+    if (!location.state) {
+      this.prevLocation = this.props.location
+    }
 	}
 
   componentDidMount() {
@@ -38,9 +41,9 @@ class App extends React.Component {
   }
 
 	componentDidUpdate() {
-		let hash = this.props.location.hash.replace('#', '')
+		const hash = this.props.location.hash.replace('#', '')
 		if (hash) {
-			let el = document.getElementById(hash)
+			const el = document.getElementById(hash)
 			if (el) el.scrollIntoView()
 		}
 	}
@@ -54,7 +57,7 @@ class App extends React.Component {
 			(location.state.modal || location.state.sidebar)
 		)
 
-		const currLocation = isModal ? this.prevLocation : location
+		const currLocation = isModal || showPageLoader ? this.prevLocation : location
 		const pos = isModal ? location.state.position : {}
 
 		const pageClasses = {
@@ -90,11 +93,10 @@ class App extends React.Component {
           <Loader className={s.pageLoader__icon} />
         </div>
 
-				<TransitionGroup>
+				<TransitionGroup component={null}>
 					<CSSTransition key={currLocation.key}
 						classNames={pageClasses}
-						timeout={250}
-						unmountOnExit>
+						timeout={250}>
 						<Fragment>
               <main>
                 <Switch location={currLocation}>
@@ -108,12 +110,11 @@ class App extends React.Component {
 					</CSSTransition>
 				</TransitionGroup>
 
-				<TransitionGroup>
+				<TransitionGroup component={null}>
 					<ModalCSSTransition key={location.key}
 						classNames={modalClasses}
 						timeout={400}
-						mountOnEnter
-						appeart>
+            unmountOnExit>
 						<Switch location={ isModal ? location : {} }>
 							<Route path="/auth" component={() => <Modal style={pos}><ModalAuth history={history} /></Modal>} />
               <Route path="/neighbors/filters" exact component={ () => <Modal style={pos}></Modal> } />
@@ -123,11 +124,10 @@ class App extends React.Component {
 					</ModalCSSTransition>
 				</TransitionGroup>
 
-				<TransitionGroup>
+				<TransitionGroup component={null}>
 					<CSSTransition key={location.key}
 						classNames={sidebarClasses}
-						timeout={{enter: 250, exit: 200}}
-						unmountOnExit>
+						timeout={{enter: 250, exit: 200}}>
   						<Switch location={location}>
   							<Route path="/sidebar" component={ () => <Sidebar currLocation={currLocation.pathname} history={history} /> } />
   						</Switch>

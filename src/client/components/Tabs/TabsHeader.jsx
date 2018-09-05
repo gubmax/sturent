@@ -1,10 +1,9 @@
 import React, { Component, cloneElement } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
-import { setActiveTabIndex } from '../../actions/tabsActions'
+import { setActiveTabIndex } from '../../redux/actions/tabsActions'
 
 import s from './TabsHeader.css'
 

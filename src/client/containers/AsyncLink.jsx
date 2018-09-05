@@ -5,7 +5,7 @@ import { createLocation } from 'history'
 
 import routes from '../routes'
 import { getStore } from '../createStore'
-import { togglePageLoader } from '../actions/appActions'
+import { togglePageLoader } from '../redux/actions/appActions'
 
 function isModifiedEvent(e) {
   !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
@@ -21,23 +21,16 @@ function handleClick(e) {
     !isModifiedEvent(e)
   ) {
     e.preventDefault()
-    const { history } = this.context.router
-    const { replace, to } = this.props
-
-    function locate() {
-      if (replace)
-        history.replace(to)
-      else
-        history.push(to)
-    }
+    const { history } = this.context.router,
+          { replace, to } = this.props
 
     if (history.location.pathname) {
       const routeTo = routes.find(route => (matchPath(to, route) ? route : null))
-      const match = matchPath(to, routeTo)
-      const store = getStore()
 
       if (routeTo) {
-        const { togglePageLoader } = this.props
+        const { togglePageLoader } = this.props,
+              match = matchPath(to, routeTo),
+              store = getStore()
 
         togglePageLoader()
 
@@ -49,15 +42,15 @@ function handleClick(e) {
               : null
           )
           .then(() => {
-            locate()
             togglePageLoader()
           })
       }
-      else
-        locate()
     }
+
+    if (replace)
+      history.replace(to)
     else
-      locate()
+      history.push(to)
   }
 }
 
@@ -68,21 +61,19 @@ class AsyncLink extends Link {
   }
 
   render() {
-    const { to, innerRef } = this.props
+    const { to, innerRef } = this.props,
+          { history } = this.context.router,
+          location = typeof to === "string"
+            ? createLocation(to, null, null, history.location)
+            : to,
+          href = history.createHref(location),
+          linkProps = Object.assign({}, this.props)
 
-    const { history } = this.context.router
-    const location =
-      typeof to === "string"
-        ? createLocation(to, null, null, history.location)
-        : to
-
-    const href = history.createHref(location)
-    const aProps = Object.assign({}, this.props)
-    delete aProps.togglePageLoader
-    delete aProps.replace
+    delete linkProps.togglePageLoader
+    delete linkProps.replace
 
     return (
-      <a {...aProps} onClick={this.handleClick} href={href} ref={innerRef} />
+      <a {...linkProps} onClick={this.handleClick} href={href} ref={innerRef} />
     )
   }
 }

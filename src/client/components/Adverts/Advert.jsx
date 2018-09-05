@@ -10,12 +10,6 @@ import c from './common.css'
 import s from './Advert.css'
 import i from '../../styles/Icon.css'
 
-class AdvertCSSTransition extends CSSTransition {
-  onEntered = () => {
-    /*Do not remove enter classes when active */
-  }
-}
-
 class Advert extends Component {
   constructor(props) {
     super(props)
@@ -23,11 +17,9 @@ class Advert extends Component {
     this.state = {
       inFavorites: props.inFavorites || false
     }
-
-    this.toggleFavorites = this.toggleFavorites.bind(this)
   }
 
-  toggleFavorites() {
+  toggleFavorites = () => {
     this.setState({ inFavorites: !this.state.inFavorites })
   }
 
@@ -103,11 +95,19 @@ class Advert extends Component {
       exitActive: s.exitActive,
     }
 
+    const favoritesClasses = {
+      enter: s.favoritesEnter,
+      enterActive: s.favoritesEnterActive,
+      exit: s.favoritesExit,
+      exitActive: s.favoritesExitActive,
+    }
+
     return (
-      <AdvertCSSTransition in={history.location.pathname !== '/neighbors'}
+      <CSSTransition in={history.location.pathname !== '/neighbors'}
         classNames={transitionClasses}
         timeout={400}
-        appear={history.action === 'PUSH'}>
+        appear={history.action === 'PUSH'}
+        onEntered={() => {/* Do not remove enter classes when active */}}>
           <div className={s.container}>
             { history.action === 'PUSH' ?
                 <span className={s.backBtn} onClick={this.props.onClick}>
@@ -123,34 +123,38 @@ class Advert extends Component {
             <Fragment>
               <div className={s.header + (!advert.img ? ' ' + c.header_withoutImg : '')}>
                 {
-                  advert.img ?
-                    <a href={`/images/neighbors/thumbnail/${advert.img}.jpg`} className={s.imgLink} target="_blank">
-                      <img src={`/images/neighbors/thumbnail/${advert.img}.jpg`} className={s.img} />
-                    </a>
-                  :
-                    <Fragment>
-                      <i className={s.header__icon}>
-                        <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + i.srIcon_border}>
-                          <circle cx="12" cy="12" r="3"/>
-                          <path d="M20,4h-3.17l-1.24-1.35C15.22,2.24,14.68,2,14.12,2H9.88c-0.56,0-1.1,0.24-1.48,0.65L7.17,4H4C2.9,4,2,4.9,2,6v12    c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5s5,2.24,5,5S14.76,17,12,17z"/>
-                        </svg>
-                      </i>
-                      <span className={s.header__text}>Нет фото</span>
-                    </Fragment>
+                  advert.img
+                    ? <a href={`/images/neighbors/thumbnail/${advert.img}.jpg`} className={s.imgLink} target="_blank">
+                        <img src={`/images/neighbors/thumbnail/${advert.img}.jpg`} className={s.img}/>
+                      </a>
+                    : <Fragment>
+                        <i className={s.header__icon}>
+                          <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + i.srIcon_border}>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M20,4h-3.17l-1.24-1.35C15.22,2.24,14.68,2,14.12,2H9.88c-0.56,0-1.1,0.24-1.48,0.65L7.17,4H4C2.9,4,2,4.9,2,6v12    c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5s5,2.24,5,5S14.76,17,12,17z"/>
+                          </svg>
+                        </i>
+                        <span className={s.header__text}>Нет фото</span>
+                      </Fragment>
                 }
                 <div className={s.actionBtns}>
-                  <span className={s.actionBtns__btn + (inFavorites ? ' ' + s.isActive : '')} onClick={this.toggleFavorites}>
-                    <i className={i.icon}>
-                      <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + (inFavorites ? i.srIcon_light : i.srIcon_secondary)}>
-                        {
-                          inFavorites ?
-                            <path d="M13.35,20.13c-0.76,0.69-1.93,0.69-2.69-0.01l-0.11-0.1C5.3,15.27,1.87,12.16,2,8.28c0.06-1.7,0.93-3.33,2.34-4.29   c2.64-1.8,5.9-0.96,7.66,1.1c1.76-2.06,5.02-2.91,7.66-1.1c1.41,0.96,2.28,2.59,2.34,4.29c0.14,3.88-3.3,6.99-8.55,11.76   L13.35,20.13z"/>
-                          :
-                            <path d="M19.66,3.99c-2.64-1.8-5.9-0.96-7.66,1.1c-1.76-2.06-5.02-2.91-7.66-1.1C2.94,4.95,2.06,6.57,2,8.28   c-0.14,3.88,3.3,6.99,8.55,11.76l0.1,0.09c0.76,0.69,1.93,0.69,2.69-0.01l0.11-0.1c5.25-4.76,8.68-7.87,8.55-11.75   C21.94,6.57,21.06,4.95,19.66,3.99z M12.1,18.55l-0.1,0.1l-0.1-0.1C7.14,14.24,4,11.39,4,8.5C4,6.5,5.5,5,7.5,5   c1.54,0,3.04,0.99,3.57,2.36h1.87C13.46,5.99,14.96,5,16.5,5c2,0,3.5,1.5,3.5,3.5C20,11.39,16.86,14.24,12.1,18.55z"/>
-                        }
-                      </svg>
-                    </i>
-                  </span>
+                  <TransitionGroup component={null}>
+                    <CSSTransition key={inFavorites}
+                      classNames={favoritesClasses}
+                      timeout={300}>
+                      <span className={s.actionBtns__btn + (inFavorites ? ' ' + s.isActive : '')} onClick={this.toggleFavorites}>
+                        <i className={i.icon}>
+                          <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + (inFavorites ? i.srIcon_light : i.srIcon_secondary)}>
+                            {
+                              inFavorites
+                                ? <path d="M13.35,20.13c-0.76,0.69-1.93,0.69-2.69-0.01l-0.11-0.1C5.3,15.27,1.87,12.16,2,8.28c0.06-1.7,0.93-3.33,2.34-4.29   c2.64-1.8,5.9-0.96,7.66,1.1c1.76-2.06,5.02-2.91,7.66-1.1c1.41,0.96,2.28,2.59,2.34,4.29c0.14,3.88-3.3,6.99-8.55,11.76   L13.35,20.13z"/>
+                                : <path d="M19.66,3.99c-2.64-1.8-5.9-0.96-7.66,1.1c-1.76-2.06-5.02-2.91-7.66-1.1C2.94,4.95,2.06,6.57,2,8.28   c-0.14,3.88,3.3,6.99,8.55,11.76l0.1,0.09c0.76,0.69,1.93,0.69,2.69-0.01l0.11-0.1c5.25-4.76,8.68-7.87,8.55-11.75   C21.94,6.57,21.06,4.95,19.66,3.99z M12.1,18.55l-0.1,0.1l-0.1-0.1C7.14,14.24,4,11.39,4,8.5C4,6.5,5.5,5,7.5,5   c1.54,0,3.04,0.99,3.57,2.36h1.87C13.46,5.99,14.96,5,16.5,5c2,0,3.5,1.5,3.5,3.5C20,11.39,16.86,14.24,12.1,18.55z"/>
+                            }
+                          </svg>
+                        </i>
+                      </span>
+                    </CSSTransition>
+                  </TransitionGroup>
                   <span className={s.actionBtns__btn}>
                     <i className={i.icon}>
                       <svg viewBox="0 0 24 24" className={i.srIcon + ' ' + i.srIcon_secondary}>
@@ -167,21 +171,17 @@ class Advert extends Component {
                 <div className={c.infoTags}>
                   <span className={c.infoTitle}>Кого ищут</span>
                   {
-                    advert.whom ?
-                      Object.keys(advert.whom).map((name, i) => (
-                        <div className={c.tag + " " + c['tag_' + name]} key={i}>{ whom[name] }</div>
-                      ))
-                    : ''
+                    advert.whom
+                      ? Object.keys(advert.whom).map((name, i) => (<div className={c.tag + " " + c['tag_' + name]} key={i}>{whom[name]}</div>))
+                      : ''
                   }
                 </div>
                 <div className={c.infoTags}>
                   <span className={c.infoTitle}>Особенности</span>
                   {
-                    advert.tags ?
-                      Object.keys(advert.tags).map((name, i) => (
-                        <div className={c.tag + " " + c['tag_' + name]} key={i}>{ tags[name] }</div>
-                      ))
-                    : ''
+                    advert.tags
+                      ? Object.keys(advert.tags).map((name, i) => (<div className={c.tag + " " + c['tag_' + name]} key={i}>{tags[name]}</div>))
+                      : ''
                   }
                 </div>
                 <div className={c.infoTags}>
@@ -203,17 +203,16 @@ class Advert extends Component {
               </div>
 
               <div className={s.text}>
-                { advert.text ?
-                    <p>{advert.text}</p>
-                  : (
-                    <Fragment>
-                      <span className={s.text_dummy + ' ' + s.dummy}></span>
-                      <span className={s.text_dummy + ' ' + s.dummy}></span>
-                      <span className={s.text_dummy + ' ' + s.dummy}></span>
-                      <span className={s.text_dummy + ' ' + s.dummy}></span>
-                      <span className={s.text_dummy + ' ' + s.dummy}></span>
-                    </Fragment>
-                  )
+                {
+                  advert.text
+                    ? <p>{advert.text}</p>
+                    : <Fragment>
+                        <span className={s.text_dummy + ' ' + s.dummy}></span>
+                        <span className={s.text_dummy + ' ' + s.dummy}></span>
+                        <span className={s.text_dummy + ' ' + s.dummy}></span>
+                        <span className={s.text_dummy + ' ' + s.dummy}></span>
+                        <span className={s.text_dummy + ' ' + s.dummy}></span>
+                      </Fragment>
                 }
               </div>
 
@@ -234,7 +233,7 @@ class Advert extends Component {
               </div>
             </Fragment>
           </div>
-      </AdvertCSSTransition>
+      </CSSTransition>
     )
   }
 }

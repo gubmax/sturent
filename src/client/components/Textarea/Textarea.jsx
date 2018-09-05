@@ -7,7 +7,6 @@ class Textarea extends Component {
 	constructor() {
   	super()
     this.state = {value: '', rows: 3, lineHeight: 0}
-    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -16,7 +15,7 @@ class Textarea extends Component {
     })
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const lineHeight = this.state.lineHeight
     const oldRows = e.target.rows
 

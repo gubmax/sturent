@@ -6,8 +6,8 @@ import thunk from 'redux-thunk'
 
 
 import createStore from './createStore';
-import reducer from './reducers/reducer'
-import AppRouter from './clientRouter.jsx'
+import reducer from './redux/reducer'
+import AppRouter from './routers/clientRouter.jsx'
 import StylesProvider from './containers/StylesProvider.jsx'
 
 const preloadedState = window.__PRELOADED_STATE__

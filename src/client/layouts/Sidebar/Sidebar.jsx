@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import Link from '../../containers/AsyncLink.jsx'
-import { showOverlay, hideOverlay } from '../../actions/overlayActions'
+import { showOverlay, hideOverlay } from '../../redux/actions/overlayActions'
 
 import s from './Sidebar.css'
 import o from '../../styles/Overlay.css'
@@ -21,23 +21,23 @@ class Sidebar extends Component {
 		this.props.hideOverlay()
 	}
 
-	onOverlayClick() {
+	onOverlayClick = () => {
 		this.props.history.goBack()
 	}
 
-	onSidebarClick(event) {
-		event.stopPropagation()
+	onSidebarClick = (e) => {
+		e.stopPropagation()
 	}
 
 	render() {
 		const { currLocation } = this.props
 
 		return (
-      <div className={o.overlay} onClick={this.onOverlayClick.bind(this)}>
-        <div className={s.sidebar} onClick={this.onSidebarClick.bind(this)}>
+      <div className={o.overlay} onClick={this.onOverlayClick}>
+        <div className={s.sidebar} onClick={this.onSidebarClick}>
           <div className={s.wrapper}></div>
           <div className={s.header}>
-            <span className={s.headerBtn} onClick={this.onOverlayClick.bind(this)}>
+            <span className={s.headerBtn} onClick={this.onOverlayClick}>
               <i className={i.icon}>
                 <svg className={i.srIcon + ' ' + i.srIcon_secondary} viewBox="0 0 24 24">
                   <path d="M2,17L2,17c0,0.55,0.45,1,1,1h18c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H3C2.45,16,2,16.45,2,17z M2,12L2,12   c0,0.55,0.45,1,1,1h18c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H3C2.45,11,2,11.45,2,12z M2,7L2,7c0,0.55,0.45,1,1,1h18   c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H3C2.45,6,2,6.45,2,7z"/>

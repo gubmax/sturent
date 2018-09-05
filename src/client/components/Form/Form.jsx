@@ -1,32 +1,33 @@
 import { Component } from 'react'
-import PropTypes from 'prop-types'
+import { node, string } from 'prop-types'
 import axios from 'axios'
 
-export default class Form extends Component {
-  constructor() {
-    super()
+class Form extends Component {
+  static propTypes = {
+    children: node,
+    className: string,
+    method: string.isRequired,
+    action: string.isRequired
   }
 
   componentDidMount() {
     const fields = this.refs.form.getElementsByClassName('field')
     let values = {}
 
-    console.log(fields[0]);
-
     for (let key in fields) {
-      fields[key].onchange = this.handleChange.bind(this)
+      fields[key].onchange = this.handleChange
       values[fields[key].name] = fields[key].value
     }
 
     this.setState(values)
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const name = e.target.name
     this.setState({ name: e.target.value })
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
 
     axios({
@@ -45,16 +46,11 @@ export default class Form extends Component {
 
 	render() {
   	return (
-      <form role="form" className={`${this.props.className}`} method={`${this.props.method}`} action={`${this.props.action}`} onSubmit={this.handleSubmit.bind(this)} ref="form">
+      <form role="form" className={`${this.props.className}`} method={`${this.props.method}`} action={`${this.props.action}`} onSubmit={this.handleSubmit} ref="form">
         {this.props.children}
       </form>
     )
   }
 }
 
-Form.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  method: PropTypes.string.isRequired,
-  action: PropTypes.string.isRequired
-}
+export default Form

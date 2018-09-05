@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -6,30 +6,24 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import Link from '../../containers/AsyncLink.jsx'
 import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
-import { setMarginForOverlay } from '../../actions/overlayActions'
-import { addToFavorites } from '../../actions/favoritesActions'
+import { setMarginForOverlay } from '../../redux/actions/overlayActions'
+import { addToFavorites } from '../../redux/actions/favoritesActions'
 
 import s from './Header.css'
 import w from '../../styles/Wrapper.css'
 import i from '../../styles/Icon.css'
 import l from '../../styles/Logo.css'
 
-class Header extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			headerState: '',
-			scrollTop: 0,
-			isShow: s.isShow,
-			isFixed: s.isFixed
-		}
-
-		this.handleShowHeader
+class Header extends Component {
+	state = {
+		headerState: '',
+		scrollTop: 0,
+		isShow: s.isShow,
+		isFixed: s.isFixed
 	}
 
 	componentDidMount() {
-		window.addEventListener('scroll', this.handleShowHeader.bind(this), false)
+		window.addEventListener('scroll', this.handleShowHeader, false)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -61,7 +55,7 @@ class Header extends React.Component {
 		document.body.style.cssText = `margin-right: ${scrollWidth}px; overflow-y: hidden;`
 	}
 
-	handleShowHeader() {
+	handleShowHeader = () => {
 		let state = ''
 		const currScroll = window.pageYOffset,
 					pastScroll = this.state.scrollTop
@@ -79,7 +73,7 @@ class Header extends React.Component {
 		})
 	}
 
-	addToFavorites() {
+	addToFavorites = () => {
 		this.props.addToFavorites()
 	}
 
@@ -120,7 +114,7 @@ class Header extends React.Component {
 							</i>
 						</LinkToModal>
 
-						<span className={s.btn_profile} onClick={this.addToFavorites.bind(this)}>
+						<span className={s.btn_profile} onClick={this.addToFavorites}>
 							<img src="/images/avatars/avatar_small.jpg" className={s.btn_profileImg} />
 						</span>
 					</div>

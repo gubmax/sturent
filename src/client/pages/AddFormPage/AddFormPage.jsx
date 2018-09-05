@@ -5,25 +5,19 @@ import Page from '../../layouts/Page/Page.jsx'
 import Textarea from '../../components/Textarea/Textarea.jsx'
 //import Form from '../components/Form.jsx'
 
-export default class AddFormPage extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			address: '',
-			whom: '',
-			rooms: '',
-			pay: '',
-			pledge: '',
-			tenants: '',
-			text: '',
-			tags: ''
-		}
-
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
+class AddFormPage extends Component {
+	state = {
+		address: '',
+		whom: '',
+		rooms: '',
+		pay: '',
+		pledge: '',
+		tenants: '',
+		text: '',
+		tags: ''
 	}
 
-	handleChange(e) {
+	handleChange = (e) => {
 		let value = {}
 		value[e.target.id] = e.target.value
 		this.setState(value)
@@ -35,7 +29,7 @@ export default class AddFormPage extends Component {
 		})
 	};
 
-	handleSubmit(e) {
+	handleSubmit = (e) => {
 		e.preventDefault()
 
 		console.log(this.state)
@@ -55,6 +49,8 @@ export default class AddFormPage extends Component {
 	}
 
 	render() {
+		const { address, whom, rooms, pay, pledge, tenants, tags } = this.this.state
+
 		return (
 			<Page title='Добавление объявления'
 				content={
@@ -101,35 +97,35 @@ export default class AddFormPage extends Component {
 									<span className="form__title">Форма для размещения объявления</span>
 									<div className="form__field">
 										<label htmlFor="address" className="field__label">Адрес</label>
-										<input type="text" className="field field_text" id="address" name="address" value={this.state.address} onChange={this.handleChange} />
+										<input type="text" className="field field_text" id="address" name="address" value={address} onChange={this.handleChange} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="whom" className="field__label">Ищу</label>
-										<input type="text" className="field field_text" id="whom" name="whom[]" value={this.state.whom} onChange={this.handleChange} />
+										<input type="text" className="field field_text" id="whom" name="whom[]" value={whom} onChange={this.handleChange} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="rooms" className="field__label">Хочу арендовать</label>
-										<input type="text" className="field field_text" id="rooms" name="rooms" value={this.state.rooms} onChange={this.handleChange} />
+										<input type="text" className="field field_text" id="rooms" name="rooms" value={rooms} onChange={this.handleChange} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="pay" className="field__label">Арендная плата</label>
-										<input className="field field_textarea" id="pay" name="pay" value={this.state.pay} onChange={this.handleChange} />
+										<input className="field field_textarea" id="pay" name="pay" value={pay} onChange={this.handleChange} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="pledge" className="field__label">Залог</label>
-										<input className="field field_textarea" id="pledge" name="pledge" value={this.state.pledge} onChange={this.handleChange} />
+										<input className="field field_textarea" id="pledge" name="pledge" value={pledge} onChange={this.handleChange} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="tenants" className="field__label">Всего жильцов</label>
-										<input className="field field_textarea" id="tenants" name="tenants" value={this.state.tenants} onChange={this.handleChange} />
+										<input className="field field_textarea" id="tenants" name="tenants" value={tenants} onChange={this.handleChange} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="text" className="field__label">Текст</label>
-										<Textarea className="field field_textarea" id="text" name="text" onUpdateTextarea={this.onUpdateTextarea.bind(this)} />
+										<Textarea className="field field_textarea" id="text" name="text" onUpdateTextarea={this.onUpdateTextarea} />
 									</div>
 									<div className="form__field">
 										<label htmlFor="tags" className="field__label">Особенности</label>
-										<input className="field field_textarea" id="tags" name="tags[]" value={this.state.tags} onChange={this.handleChange} />
+										<input className="field field_textarea" id="tags" name="tags[]" value={tags} onChange={this.handleChange} />
 									</div>
 
 									<div className="btns-group">
@@ -143,3 +139,5 @@ export default class AddFormPage extends Component {
 		)
 	}
 }
+
+export default AddFormPage

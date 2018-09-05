@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
-import { showOverlay, hideOverlay } from '../../actions/overlayActions'
+import { showOverlay, hideOverlay } from '../../redux/actions/overlayActions'
 
 import s from './Modal.css'
 import o from '../../styles/Overlay.css'
@@ -24,11 +24,11 @@ class Modal extends Component {
 		this.props.hideOverlay()
 	}
 
-	onOverlayClick() {
+	onOverlayClick = () => {
 		this.props.history.goBack()
 	}
 
-	onModalClick(e) {
+	onModalClick = (e) =>{
 		e.stopPropagation()
 	}
 
@@ -37,14 +37,14 @@ class Modal extends Component {
 		const { appear } = this.props
 
 		const childrenWithProps = Children.map(children, child =>
-      cloneElement(child, { onClick: this.onOverlayClick.bind(this) }))
+      cloneElement(child, { onClick: this.onOverlayClick }))
 
 		return (
 			<Fragment>
 	      <div className={o.overlay} />
-				<div className={s.container} style={style} onClick={this.onOverlayClick.bind(this)}>
-					<div className={s.modal} onClick={this.onModalClick.bind(this)}>
-						{childrenWithProps}
+				<div className={s.container} style={style} onClick={this.onOverlayClick}>
+					<div className={s.modal} onClick={this.onModalClick}>
+						{ childrenWithProps }
 					</div>
 				</div>
 			</Fragment>

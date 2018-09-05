@@ -16,7 +16,7 @@
 .header {
   position: relative;
   padding: 20px 0 20px;
-  background: linear-gradient(0deg, var(--accent), var(--accent_header));
+  background: linear-gradient(0deg, var(--accent), var(--accent_light));
 }
 .header:after {
   content: '';

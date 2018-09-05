@@ -8,19 +8,11 @@ import Loader from '../Loader/Loader.jsx'
 import s from './AdvertsList.css'
 
 class AdvertsList extends Component {
-	constructor(props) {
-		super(props)
-
-		const { items } = this.props
-
-		this.state = {
-			items: items,
-			skip: items.length,
-			loading: false,
-			isLast: false
-		}
-
-		this.onScroll = this.onScroll.bind(this)
+	state = {
+		items: this.props.items,
+		skip: this.props.items.length,
+		loading: false,
+		isLast: false
 	}
 
 	componentDidMount() {
@@ -31,7 +23,7 @@ class AdvertsList extends Component {
 		window.removeEventListener('scroll', this.onScroll)
 	}
 
-	onScroll() {
+	onScroll = () => {
     const { loading, skip, items, isLast } = this.state
 		let clientHeight = document.body.clientHeight,
 				listBottom = this.refs.list.getBoundingClientRect().bottom
@@ -74,14 +66,14 @@ class AdvertsList extends Component {
         	})}
 				</div>
 				{
-					loading ?
-						<Loader className={s.loader} />
-					: null
+					loading
+					  ? <Loader className={s.loader}/>
+					  : null
 				}
 				{
-					isLast ?
-						<span className={s.msg}>Объявления закончились</span>
-					: null
+					isLast
+					  ? <span className={s.msg}>Объявления закончились</span>
+					  : null
 				}
 			</div>
 		)

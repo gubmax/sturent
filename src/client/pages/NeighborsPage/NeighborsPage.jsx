@@ -6,7 +6,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import Link from '../../containers/AsyncLink.jsx'
 import Page from '../../layouts/Page/Page.jsx'
 import AdvertsList from '../../components/Adverts/AdvertsList.jsx'
-import Loader from '../../components/Loader/Loader.jsx'
 import withAdverts from '../../containers/withAdverts.jsx'
 import { API_PREFIX } from '../../../etc/config.json'
 
@@ -16,12 +15,6 @@ import i from '../../styles/Icon.css'
 class Neighbors extends Component {
 	render() {
 		const { adverts } = this.props
-		let content
-
-		if (!adverts)
-			content = <Loader />
-		else
-			content = <AdvertsList url={`${API_PREFIX}/rent/adverts`} items={adverts} />
 
 		return (
 			<Page title='Поиск соседей'
@@ -46,7 +39,9 @@ class Neighbors extends Component {
 					</Fragment>
 				}
 				withoutWrapper={true}
-				content={content} />
+				content={
+					<AdvertsList url={`${API_PREFIX}/rent/adverts`} items={adverts} />
+				} />
 		)
 	}
 }

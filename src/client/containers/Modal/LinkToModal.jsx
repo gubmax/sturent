@@ -9,7 +9,7 @@ class ModalToggler extends Component {
     onClick: func,
 	}
 
-  onLinkClick() {
+  onLinkClick = () => {
     const { history, to, onClick } = this.props
     const { top, right, left, bottom, width, height } = this.refs.link.getBoundingClientRect()
 
@@ -28,9 +28,7 @@ class ModalToggler extends Component {
 		const { children, to, className } = this.props
 
     return (
-      <a className={className} to={to} ref="link" onClick={this.onLinkClick.bind(this)} >
-        { children }
-      </a>
+      <a className={className} to={to} ref="link" onClick={this.onLinkClick}>{ children }</a>
     )
 	}
 }

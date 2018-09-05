@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
-import { setCurrAdvert } from '../../actions/advertsActions'
+import { setCurrAdvert } from '../../redux/actions/advertsActions'
 
 import c from './common.css'
 import s from './AdvertItem.css'
@@ -38,7 +38,7 @@ class AdvertItem extends Component {
     return str.join(', ')
   }
 
-  onItemClick() {
+  onItemClick = () => {
     const { item, dispatch } = this.props
 
     dispatch(setCurrAdvert(item))
@@ -63,7 +63,7 @@ class AdvertItem extends Component {
 
     return (
       <div className={s.item}>
-        <LinkToModal className={s.advert} to={'/neighbors/' + item._id} onClick={this.onItemClick.bind(this)}>
+        <LinkToModal className={s.advert} to={'/neighbors/' + item._id} onClick={this.onItemClick}>
           <div className={s.header + (!item.img ? ' ' + c.header_withoutImg : '')}>
             {
               item.img ?

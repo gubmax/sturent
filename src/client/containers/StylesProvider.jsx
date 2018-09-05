@@ -1,7 +1,7 @@
 import { Component, Children } from 'react'
 import { element, func } from 'prop-types'
 
-export default class StylesProvider extends Component {
+class StylesProvider extends Component {
   static propTypes = {
     children: element.isRequired,
     onInsertCss: func.isRequired
@@ -19,3 +19,5 @@ export default class StylesProvider extends Component {
     return Children.only(this.props.children)
   }
 }
+
+export default StylesProvider

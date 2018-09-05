@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 
-import { getAdverts } from '../actions/advertsActions'
+import { getAdverts } from '../redux/actions/advertsActions'
 
-export default function withAdvert(WrapedComponent) {
+function withAdvert(WrapedComponent) {
   class AsyncComponent extends Component {
     static async getInitialProps({ dispatch }) {
       await dispatch(getAdverts())
@@ -34,3 +34,5 @@ export default function withAdvert(WrapedComponent) {
     withRouter
   )(AsyncComponent)
 }
+
+export default withAdvert

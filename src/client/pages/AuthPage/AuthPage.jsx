@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { node } from 'prop-types'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import Page from '../../layouts/Page/Page.jsx'
 
 class AuthPage extends Component {
+  static propTypes = {
+    children: node
+  }
+
   render() {
   	return (
       <Page title='Авторизация'
@@ -13,10 +17,6 @@ class AuthPage extends Component {
       />
   	)
   }
-}
-
-AuthPage.propTypes = {
-  children: PropTypes.node
 }
 
 export default AuthPage

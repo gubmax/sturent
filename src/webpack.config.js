@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 
 const routes = require('./client/routes')
@@ -165,7 +165,7 @@ const client = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ].concat(!isDebug ? [
     new UglifyJsPlugin()
   ] : [])

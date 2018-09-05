@@ -3,7 +3,6 @@
   --primary: #404040;
   --secondary: #7c879e;
   --accent: #4d67d2;
-  --accent_header: #5743ce;
   --accent_light: color-mod(var(--accent) tint(25%));
   --accent_bg: color-mod(var(--accent) alpha(14%));
   --light: #f6f7fa;
