@@ -31,8 +31,8 @@ class Form extends Component {
     e.preventDefault()
 
     axios({
-      method: `${this.props.method}`,
-      url: `${this.props.action}`,
+      method: this.props.method,
+      url: this.props.action,
       data: this.state
     })
     .then(res => {
@@ -45,8 +45,9 @@ class Form extends Component {
   }
 
 	render() {
+    const { className, method, action } = this.props
   	return (
-      <form role="form" className={`${this.props.className}`} method={`${this.props.method}`} action={`${this.props.action}`} onSubmit={this.handleSubmit} ref="form">
+      <form role="form" className={className} method={method} action={action} onSubmit={this.handleSubmit} ref="form">
         {this.props.children}
       </form>
     )

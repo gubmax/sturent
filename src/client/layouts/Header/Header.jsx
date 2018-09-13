@@ -7,7 +7,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import Link from '../../containers/AsyncLink.jsx'
 import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
 import { setMarginForOverlay } from '../../redux/actions/overlayActions'
-import { addToFavorites } from '../../redux/actions/favoritesActions'
 
 import s from './Header.css'
 import w from '../../styles/Wrapper.css'
@@ -73,12 +72,8 @@ class Header extends Component {
 		})
 	}
 
-	addToFavorites = () => {
-		this.props.addToFavorites()
-	}
-
 	render() {
-		const { currLocation } = this.props
+		const { currLocation, favoritesCounter } = this.props
 
 		return (
 			<header className={this.state.headerState}>
@@ -103,7 +98,7 @@ class Header extends Component {
 									<path d="M13.35,20.13c-0.76,0.69-1.93,0.69-2.69-0.01l-0.11-0.1C5.3,15.27,1.87,12.16,2,8.28c0.06-1.7,0.93-3.33,2.34-4.29   c2.64-1.8,5.9-0.96,7.66,1.1c1.76-2.06,5.02-2.91,7.66-1.1c1.41,0.96,2.28,2.59,2.34,4.29c0.14,3.88-3.3,6.99-8.55,11.76   L13.35,20.13z"/>
 								</svg>
 							</i>
-							<span className={`${s.counter} ${s.counter_favorites} ${s.btn__counter}${!this.props.favorites.counter ? " " + s.isHide : ''}`}>{this.props.favorites.counter}</span>
+							<span className={`${s.counter} ${s.counter_favorites} ${s.btn__counter + (!favoritesCounter ? ' ' + s.isHide : '')}`}>{favoritesCounter}</span>
 						</Link>
 
 						<LinkToModal to="/auth" className={s.btn + " " + s.btn_auth}>
@@ -114,7 +109,7 @@ class Header extends Component {
 							</i>
 						</LinkToModal>
 
-						<span className={s.btn_profile} onClick={this.addToFavorites}>
+						<span className={s.btn_profile}>
 							<img src="/images/avatars/avatar_small.jpg" className={s.btn_profileImg} />
 						</span>
 					</div>
@@ -125,13 +120,12 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-	favorites: state.favorites,
+	favoritesCounter: state.favorites.counter,
 	overlay: state.overlay
 })
 
 const mapDispatchToProps = ({
-	setMarginForOverlay,
-	addToFavorites
+	setMarginForOverlay
 })
 
 export default compose(

@@ -12,7 +12,7 @@ export default () => (
         if (props.component.default)
           props.component = props.component.default
 
-        return <Route key={ props.path } {...props}/>
+        return <Route key={props.path} {...props}/>
       })
     }
   </App>

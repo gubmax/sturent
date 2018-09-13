@@ -12,7 +12,7 @@ class TabsHeader extends Component {
 	}
 
 	render() {
-		const { isActive, onHandleClick, text, key } = this.props
+		const { isActive, onHandleClick, text } = this.props
 
 		return (
       <div className={s.title + (isActive ? ' ' + s.isActive : '')}

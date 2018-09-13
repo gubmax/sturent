@@ -45,12 +45,12 @@ function handleClick(e) {
             togglePageLoader()
           })
       }
-    }
 
-    if (replace)
-      history.replace(to)
-    else
-      history.push(to)
+      if (replace)
+        history.replace(to)
+      else
+        history.push(to)
+    }
   }
 }
 

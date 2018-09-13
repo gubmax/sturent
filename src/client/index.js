@@ -1,6 +1,6 @@
 import React from 'react'
 import { hydrate  } from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
@@ -20,8 +20,6 @@ const insertCss = (...styles) => {
 	return () => { removeCss.forEach(f => f()) }
 }
 
-let initialRendering = true
-
 hydrate((
 	<Provider store={store}>
 		<StylesProvider onInsertCss={insertCss}>
@@ -33,8 +31,5 @@ hydrate((
 ),
 document.getElementById('root'),
 () => {
-	if (initialRendering) {
-		document.getElementById('css').remove()
-		initialRendering = false
-	}
+	document.getElementById('css').remove()
 })

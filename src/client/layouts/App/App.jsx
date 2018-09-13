@@ -31,8 +31,10 @@ class App extends Component {
 	componentWillReceiveProps(nextProps) {
     const { location } = this.props
 
+    console.log(location);
+
     if (!location.state) {
-      this.prevLocation = this.props.location
+      this.prevLocation = location
     }
 	}
 
@@ -57,8 +59,8 @@ class App extends Component {
 			(location.state.modal || location.state.sidebar)
 		)
 
-		const currLocation = isModal || showPageLoader ? this.prevLocation : location
-		const pos = isModal ? location.state.position : {}
+		const currLocation = isModal || showPageLoader ? this.prevLocation : location,
+          pos = isModal ? location.state.position : {}
 
 		const pageClasses = {
 			enter: s.pageEnter,
