@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
 
 import { getAdverts } from '../redux/actions/advertsActions'
 
@@ -27,7 +29,10 @@ function withAdvert(WrapedComponent) {
   	adverts: state.adverts.list
   })
 
-  return connect(mapStateToProps)(AsyncComponent)
+  return compose(
+   	withRouter,
+    connect(mapStateToProps)
+  )(AsyncComponent)
 }
 
 export default withAdvert

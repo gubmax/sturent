@@ -1,4 +1,4 @@
-export const toggleFavorites = (id) => ({
-  type: 'FAVORITES_TOGGLE',
-  payload: id
+export const toggleFavorites = id => ({
+    type: 'FAVORITES_TOGGLE',
+    payload: id,
 })

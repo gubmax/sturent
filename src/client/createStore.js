@@ -6,18 +6,18 @@ import reducer from './redux/reducer'
 let store
 
 export default function prepareStore(initialState) {
-  return store = createStore(
+    return store = createStore(
   	reducer,
   	initialState,
-  	window.__REDUX_DEVTOOLS_EXTENSION__ ?
-  		compose(
+  	window.__REDUX_DEVTOOLS_EXTENSION__
+  		? compose(
   			applyMiddleware(thunk),
-  			window.__REDUX_DEVTOOLS_EXTENSION__()
+  			window.__REDUX_DEVTOOLS_EXTENSION__(),
   		)
-  	: applyMiddleware(thunk)
-  )
+  	  : applyMiddleware(thunk),
+    )
 }
 
 export function getStore() {
-  return store
+    return store
 }

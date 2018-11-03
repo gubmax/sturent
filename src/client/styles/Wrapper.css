@@ -1,18 +1,18 @@
 @import './_media.css';
 
 .wrapper {
-  position: relative;
-  box-sizing: border-box;
-  min-width: 320px;
-  max-width: 1000px;
-  margin: 0 auto;
-	padding-left: var(--v-margin_mobile);
-	padding-right: var(--v-margin_mobile);
+    position: relative;
+    box-sizing: border-box;
+    min-width: 320px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: var(--v-margin_mobile);
+    padding-right: var(--v-margin_mobile);
 }
 
 @media (--big-viewport) {
-  .wrapper {
-    padding-left: var(--v-margin_desktop);
-    padding-right: var(--v-margin_desktop);
-  }
+    .wrapper {
+        padding-left: var(--v-margin_desktop);
+        padding-right: var(--v-margin_desktop);
+    }
 }

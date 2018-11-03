@@ -1,18 +1,18 @@
 .columns {
-  display: flex;
-  flex-flow: row-reverse wrap;
-  justify-content: flex-end;
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: flex-end;
 }
 .column {
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
-  width: 50%;
-  flex: 1;
-  &:first-of-type {
-    margin-left: 10px;
-  }
-  &:last-of-type  {
-    margin-right: 10px;
-  }
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    flex: 1;
+    &:first-of-type {
+        margin-left: 10px;
+    }
+    &:last-of-type {
+        margin-right: 10px;
+    }
 }

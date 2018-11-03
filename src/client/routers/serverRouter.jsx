@@ -1,19 +1,25 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React from 'react'
+import { Route } from 'react-router-dom'
 
-import routes from '../routes';
-import App from '../layouts/App/App.jsx';
+import routes from '../routes'
+import App from '../layouts/App/App'
 
-export default () => (
-  <App>
-    {
-      routes.map(props => {
-        props.component = require(`../pages/${props.componentName}/${props.componentName}.jsx`)
-        if (props.component.default)
-          props.component = props.component.default
+const serverRouter = () => (
+    <App>
+        {
+            routes.map((props) => {
+                const data = props
+                let { component } = data
 
-        return <Route key={props.path} {...props}/>
-      })
-    }
-  </App>
-);
+                component = require(`../pages/${props.componentName}/${props.componentName}`) // eslint-disable-line global-require
+                if (component.default) component = component.default
+
+                data.component = component
+
+                return <Route key={data.path} {...data} />
+            })
+        }
+    </App>
+)
+
+export default serverRouter

@@ -14,169 +14,169 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 /* Base Styles */
 body,
 html {
-  height: 100%;
+    height: 100%;
 }
 body {
-	overflow-y: scroll;
-  overflow-x: hidden;
-  background: var(--light_2);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: var(--light_2);
 }
 a {
-	color: inherit;
-	text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 #app {
-  position: relative;
-	height: inherit;
-  color: var(--primary);
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont,"Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  -webkit-tap-highlight-color: transparent;
+    position: relative;
+    height: inherit;
+    color: var(--primary);
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont,"Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
 }
 main {
-  padding-top: var(--header-height);
+    padding-top: var(--header-height);
 }
 
 /* Page Loader */
 .pageLoader {
-  position: absolute;
-  top: 0;
-  left: 0;
-	width: 100vw;
-	height: 100vh;
-  background: color-mod(var(--white) alpha(90%));
-  z-index: 2;
-  opacity: 0;
-  visibility: hidden;
-  transition: visibility .4s, opacity .4s;
-  &.isShow {
-    opacity: 1;
-    visibility: visible;
-  }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: color-mod(var(--white) alpha(90%));
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility .4s, opacity .4s;
+    &.isShow {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 .pageLoader__icon {
-	position: fixed !important;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Loader */
 .loader {
-  position: fixed;
-  top: 0;
-  height: 3px;
-  width: 100%;
-  overflow: hidden;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    height: 3px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1000;
 }
 .loader:before {
-  display: block;
-  position: absolute;
-  content: "";
-  left: -200px;
-  width: 200px;
-  height: 4px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, var(--red), var(--pink));
-  animation: loading 1s linear infinite 1s;
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 4px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--red), var(--pink));
+    animation: loading 1s linear infinite 1s;
 }
 
 @keyframes loading {
-  from {left: -200px; width: 30%;}
-  50% {width: 30%;}
-  70% {width: 70%;}
-  80% {left: 50%;}
-  95% {left: 120%;}
-  to {left: 100%;}
+    from {left: -200px; width: 30%;}
+    50% {width: 30%;}
+    70% {width: 70%;}
+    80% {left: 50%;}
+    95% {left: 120%;}
+    to {left: 100%;}
 }
 
 /* Page Transition */
 .pageEnter {
-  opacity: .01;
-  transform: scale(.95);
-  &.pageEnterActive {
-    opacity: 1;
-    transform: scale(1);
-    transform-origin: top;
-    transition: transform .25s ease, opacity .25s;
-  }
+    opacity: .01;
+    transform: scale(.95);
+    &.pageEnterActive {
+        opacity: 1;
+        transform: scale(1);
+        transform-origin: top;
+        transition: transform .25s ease, opacity .25s;
+    }
 }
 .pageExit {
-  position: absolute;
-	visibility: hidden;
+    position: absolute;
+    visibility: hidden;
 }
 
 /* Modal Transition */
 .modalEnter {
-  opacity: 0.01;
-  &.modalEnterActive {
-    opacity: 1;
-    transition: opacity .4s;
-  }
-  &.modalEnterActive + div {
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
+    opacity: 0.01;
+    &.modalEnterActive {
+        opacity: 1;
+        transition: opacity .4s;
+    }
+    &.modalEnterActive + div {
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 .modalExit {
-  opacity: 1;
-  &.modalExitActive {
-    opacity: 0.01;
-    transition: opacity .4s;
-  }
-  &.modalExitActive + div {
-    overflow: hidden !important;
-    border-radius: 8px !important;
-  }
+    opacity: 1;
+    &.modalExitActive {
+        opacity: 0.01;
+        transition: opacity .4s;
+    }
+    &.modalExitActive + div {
+        overflow: hidden !important;
+        border-radius: 8px !important;
+    }
 }
 
 /* Sidebar Transition */
 .sidebarEnter {
-  opacity: 0.01;
-  &.sidebarEnterActive {
-    opacity: 1;
-    transition: opacity .25s;
-  }
-  & > div {
     opacity: 0.01;
-    transform: translateX(-100%);
-  }
-  &.sidebarEnterActive > div {
-    opacity: 1;
-    transform: translateX(0);
-    transition: transform .25s ease, opacity .25s;
-  }
+    &.sidebarEnterActive {
+        opacity: 1;
+        transition: opacity .25s;
+    }
+    & > div {
+        opacity: 0.01;
+        transform: translateX(-100%);
+    }
+    &.sidebarEnterActive > div {
+        opacity: 1;
+        transform: translateX(0);
+        transition: transform .25s ease, opacity .25s;
+    }
 }
 .sidebarExit {
-  opacity: 1;
-  &.sidebarExitActive {
-    opacity: 0.01;
-    transition: opacity .2s;
-  }
-  & > div {
     opacity: 1;
-    transform: translateX(0);
-  }
-  &.sidebarExitActive > div {
-    opacity: 0.01;
-    transform: translateX(-100%);
-    transition: transform .2s ease, opacity .2s;
-  }
+    &.sidebarExitActive {
+        opacity: 0.01;
+        transition: opacity .2s;
+    }
+    & > div {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    &.sidebarExitActive > div {
+        opacity: 0.01;
+        transform: translateX(-100%);
+        transition: transform .2s ease, opacity .2s;
+    }
 }

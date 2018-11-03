@@ -1,5 +1,9 @@
-src/.ftpconfig
-src/node_modules/*
+package-lock.json
+
+node_modules/*
+
+mongodb/*
+!mongodb/.gitkeep
 
 src/server/bundle/*
 !src/server/bundle/.gitkeep

@@ -2,94 +2,94 @@
 
 /* Form */
 .form {
-  position: relative;
-  box-sizing: border-box;
-  margin: 0 auto 20px;
-  padding: 20px var(--v-margin_mobile);
-  background: var(--white);
-  border-radius: 8px;
-  box-shadow: 0 4px 20px var(--shadow);
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto 20px;
+    padding: 20px var(--v-margin_mobile);
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px var(--shadow);
 }
 .form__field {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .field__fieldWithColumns {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 .form__text {
-  color: var(--secondary);
-  line-height: 1.2;
-  flex: 1;
+    color: var(--secondary);
+    line-height: 1.2;
+    flex: 1;
 }
 .form__text_center {
-  margin-bottom: 12px;
-  color: var(--primary);
-  font-size: 16px;
-  text-align: center;
+    margin-bottom: 12px;
+    color: var(--primary);
+    font-size: 16px;
+    text-align: center;
 }
 .form__text_link {
-  display: inline-block;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
+    display: inline-block;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 /* Fields */
 .field__label {
-  display: block;
-  line-height: 1em;
-  font-weight: 500;
-  margin: 0 0 4px 4px;
+    display: block;
+    line-height: 1em;
+    font-weight: 500;
+    margin: 0 0 4px 4px;
 }
 .field {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 14px;
-  background: var(--light);
-  color: var(--primary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  outline: none;
-  transition: box-shadow .2s, border-color .2s;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 14px;
+    background: var(--light);
+    color: var(--primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: box-shadow .2s, border-color .2s;
 }
 .field:focus {
-  box-shadow: inset 0 0 0 1px var(--accent_light);
-  border-color: var(--accent_light);
-  background: var(--accent_bg)
+    box-shadow: inset 0 0 0 1px var(--accent_light);
+    border-color: var(--accent_light);
+    background: var(--accent_bg)
 }
 .field_text {
-  line-height: 38px;
-  padding: 0 12px;
+    line-height: 38px;
+    padding: 0 12px;
 }
 .field_textarea {
-  line-height: 1.5em;
-  padding: 8px 12px;
-  resize: none;
-  user-select: text;
+    line-height: 1.5em;
+    padding: 8px 12px;
+    resize: none;
+    user-select: text;
 }
 .field_firstColumn {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 .field_secondaryColumn {
-  margin-left: 8px;
+    margin-left: 8px;
 }
 
 /* Input Placeholder */
 input::-webkit-input-placeholder {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 input::-moz-placeholder {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 input:-ms-input-placeholder {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 
 @media (--big-viewport) {
-  .form {
-    max-width: 480px;
-  }
+    .form {
+        max-width: 480px;
+    }
 }

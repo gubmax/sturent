@@ -1,20 +1,20 @@
 @import '../../styles/_media.css';
 
 .container {
-  position: fixed;
-  display: flex;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  flex-flow: column nowrap;
-  transition: all .45s cubic-bezier(.23, 1, .32, 1);
-  overflow: hidden;
-  z-index: 101;
+    position: fixed;
+    display: flex;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    flex-flow: column nowrap;
+    transition: all .45s cubic-bezier(.23, 1, .32, 1);
+    overflow: hidden;
+    z-index: 101;
 }
 .modal {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  margin: auto;
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
 }

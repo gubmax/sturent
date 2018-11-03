@@ -3,7 +3,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
+import LinkToModal from '../../containers/Modal/LinkToModal'
 import { setCurrAdvert } from '../../redux/actions/advertsActions'
 import { formatRent, formatVal } from './format'
 

@@ -1,33 +1,33 @@
 @import '../../styles/_media.css';
 
 footer {
-  display: none;
+    display: none;
 }
 @media (--big-viewport) {
-  footer {
-    display: block;
-    flex: 0 0 auto;
-    background: var(--light_2);
-  }
-  .footer__wrapper {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    padding: 28px 0;
-  }
-  .footer__link {
-    margin: 0 16px;
-    padding: 0 16px;
-    color: var(--secondary);
-    transition: background 0.25s;
-    border-radius: 4px;
-  }
-  .footer__link:active {
-    background: var(--border);
-  }
-  .footer__copyright {
-    line-height: 40px;
-    margin: 0 20px;
-    color: var(--secondary);
-  }
+    footer {
+        display: block;
+        flex: 0 0 auto;
+        background: var(--light_2);
+    }
+    .footer__wrapper {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        padding: 28px 0;
+    }
+    .footer__link {
+        margin: 0 16px;
+        padding: 0 16px;
+        color: var(--secondary);
+        transition: background 0.25s;
+        border-radius: 4px;
+    }
+    .footer__link:active {
+        background: var(--border);
+    }
+    .footer__copyright {
+        line-height: 40px;
+        margin: 0 20px;
+        color: var(--secondary);
+    }
 }

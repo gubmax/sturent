@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
-import Link from '../../containers/AsyncLink.jsx'
-import LinkToModal from '../../containers/Modal/LinkToModal.jsx'
+import Link from '../../containers/AsyncLink'
+import LinkToModal from '../../containers/Modal/LinkToModal'
 import { setMarginForOverlay } from '../../redux/actions/overlayActions'
 
 import s from './Header.css'

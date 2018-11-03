@@ -1,6 +1,6 @@
 {
 	"API_PREFIX": "/api",
-	"SERVER_PORT": 8000,
+	"SERVER_PORT": 5454,
 	"DB": {
 		"NAME": "portfolio",
 		"HOST": "localhost",

@@ -1,43 +1,43 @@
 .sidebar {
-  position: relative;
-  width: 300px;
-  min-height: 100%;
+    position: relative;
+    width: 300px;
+    min-height: 100%;
 }
 .wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 300px;
-  background: var(--light);
-  z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    background: var(--light);
+    z-index: -1;
 }
 .header {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  padding-left: 16px;
-  color: var(--secondary);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding-left: 16px;
+    color: var(--secondary);
 }
 .copyright {
-  display: block;
-  padding: 20px 28px;
-  color: var(--secondary);
+    display: block;
+    padding: 20px 28px;
+    color: var(--secondary);
 }
 .headerBtn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 44px;
-  height: 44px;
-  margin-right: 8px;
-  color: var(--white);
-  border-radius: 50%;
-  text-align: center;
-  transition: background .25s;
-  &:active {
-    background: var(--light_2);
-  }
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    margin-right: 8px;
+    color: var(--white);
+    border-radius: 50%;
+    text-align: center;
+    transition: background .25s;
+    &:active {
+        background: var(--light_2);
+    }
 }

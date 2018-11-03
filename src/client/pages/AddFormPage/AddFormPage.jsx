@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import Page from '../../layouts/Page/Page.jsx'
-import Textarea from '../../components/Textarea/Textarea.jsx'
-//import Form from '../components/Form.jsx'
+import Page from '../../layouts/Page/Page'
+import Textarea from '../../components/Textarea/Textarea'
+//import Form from '../components/Form'
 
 class AddFormPage extends Component {
 	state = {

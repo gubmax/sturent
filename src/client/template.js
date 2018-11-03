@@ -1,4 +1,6 @@
-export default ({ body, preloadedState, componentNames, css }) => `
+export default ({
+    body, preloadedState, componentNames, css,
+}) => `
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,7 +15,7 @@ export default ({ body, preloadedState, componentNames, css }) => `
 
 	<!-- JavaScripts -->
 	<script type="text/javascript" id="state">
-		window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
+		window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
 		document.getElementById('state').remove();
 	</script>
 	<script type="text/javascript" src="/js/common.bundle.js" async></script>
@@ -28,7 +30,7 @@ export default ({ body, preloadedState, componentNames, css }) => `
 	<div id="root">${body}</div>
 </body>
 </html>
-`;
-//<link rel="stylesheet" type="text/css" href="/css/styles.css" >
-//<link rel="stylesheet" type="text/css" media="screen and (min-width: 776px)" href="/css/min-776.css"/>
+`
+// <link rel="stylesheet" type="text/css" href="/css/styles.css" >
+// <link rel="stylesheet" type="text/css" media="screen and (min-width: 776px)" href="/css/min-776.css"/>
 // ${componentNames ? (componentNames.map(componentName => `<script type="text/javascript" src='/js/${componentName}.js' async></script>`)) : ''}

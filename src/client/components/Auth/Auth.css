@@ -1,69 +1,69 @@
 @import '../../styles/_media.css';
 
 .container {
-  background: var(--white);
-  box-shadow: 0 4px 20px var(--shadow);
-  overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 4px 20px var(--shadow);
+    overflow: hidden;
 }
 .header {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  background: var(--light);
-  padding: 12px var(--v-margin_mobile) 12px 12px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background: var(--light);
+    padding: 12px var(--v-margin_mobile) 12px 12px;
 }
 .body {
-  padding: 12px var(--v-margin_mobile);
+    padding: 12px var(--v-margin_mobile);
 }
 .title {
-  display: block;
-  color: var(--secondary);
-  font-size: 28px;
-  line-height: 1em;
+    display: block;
+    color: var(--secondary);
+    font-size: 28px;
+    line-height: 1em;
 }
 .tabs {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 20px 0 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0 40px;
 }
 .tabs_header > .tabs {
-  background: var(--light_2);
+    background: var(--light_2);
 }
 .footer {
-  padding: 0 var(--v-margin_mobile) 20px;
+    padding: 0 var(--v-margin_mobile) 20px;
 }
 .closeBtn {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  margin-right: 12px;
-  padding: 8px;
-  color: var(--secondary);
-  vertical-align: middle;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background .25s;
-  &:active {
-    background: var(--border);
-  }
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-right: 12px;
+    padding: 8px;
+    color: var(--secondary);
+    vertical-align: middle;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background .25s;
+    &:active {
+        background: var(--border);
+    }
 }
 
 @media (--middle-viewport) {
-  .container {
-    border-radius: 8px;
-  }
+    .container {
+        border-radius: 8px;
+    }
 }
 
 @media (--big-viewport) {
-  .header {
-    padding: 12px var(--v-margin_desktop) 12px 12px;
-  }
-  .body {
-    padding: 12px var(--v-margin_desktop);
-  }
-  .footer {
-    padding: 0 var(--v-margin_desktop) 20px;
-  }
+    .header {
+        padding: 12px var(--v-margin_desktop) 12px 12px;
+    }
+    .body {
+        padding: 12px var(--v-margin_desktop);
+    }
+    .footer {
+        padding: 0 var(--v-margin_desktop) 20px;
+    }
 }

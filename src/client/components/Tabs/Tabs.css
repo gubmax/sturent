@@ -1,29 +1,29 @@
 .tabs {
-  position: relative;
+    position: relative;
 }
 
 /* Tabs Transition */
 .tabsEnter {
-  display: block;
-  opacity: 0.01;
-  transform: translateX(20%);
-  &.tabsEnterActive {
-    opacity: 1;
-    transform: translateX(0%);
-    transform-origin: top;
-    transition: transform .25s ease, opacity .25s;
-  }
+    display: block;
+    opacity: 0.01;
+    transform: translateX(20%);
+    &.tabsEnterActive {
+        opacity: 1;
+        transform: translateX(0%);
+        transform-origin: top;
+        transition: transform .25s ease, opacity .25s;
+    }
 }
 .tabsExit {
-  display: block;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  opacity: 1;
-  transform: translateX(0);
-  &.tabsExitActive {
-    opacity: 0.01;
-    transform: translateX(-20%);
-    transition: transform .25s ease, opacity .25s;
-  }
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    opacity: 1;
+    transform: translateX(0);
+    &.tabsExitActive {
+        opacity: 0.01;
+        transform: translateX(-20%);
+        transition: transform .25s ease, opacity .25s;
+    }
 }

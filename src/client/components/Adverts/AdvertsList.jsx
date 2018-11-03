@@ -2,21 +2,28 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
-import AdvertItem from './AdvertItem.jsx'
-import Loader from '../Loader/Loader.jsx'
+import AdvertItem from './AdvertItem'
+import Loader from '../Loader/Loader'
 
 import s from './AdvertsList.css'
 
 class AdvertsList extends Component {
 	state = {
 		items: this.props.items,
-		skip: this.props.items.length,
+		skip: this.itemsCount,
 		loading: false,
 		isLast: false
 	}
 
+	get itemsCount() {
+		const { items } = this.props
+		return items ? items.length : null
+	}
+
 	componentDidMount() {
-		window.addEventListener('scroll', this.onScroll)
+		if (this.itemsCount) {
+			window.addEventListener('scroll', this.onScroll)
+		}
 	}
 
 	componentWillUnmount() {
@@ -24,9 +31,9 @@ class AdvertsList extends Component {
 	}
 
 	onScroll = () => {
-    const { loading, skip, items, isLast } = this.state
+    	const { loading, skip, items, isLast } = this.state
 		let clientHeight = document.body.clientHeight,
-				listBottom = this.refs.list.getBoundingClientRect().bottom
+			listBottom = this.refs.list.getBoundingClientRect().bottom
 
 		if (listBottom - 200 > clientHeight || loading) return
 
@@ -61,9 +68,13 @@ class AdvertsList extends Component {
 		return (
 			<div className={s.list} ref="list">
 				<div className={s.container}>
-        	{items.map((child, i) => {
-          	return <AdvertItem key={i} item={child} />
-        	})}
+			    	{
+						items && items.length
+							? items.map((child, i) => {
+								return <AdvertItem key={i} item={child} />
+							})
+							: <span className={s.msg}>Объявления не найдены</span>
+					}
 				</div>
 				{
 					loading

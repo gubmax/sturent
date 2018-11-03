@@ -1,76 +1,76 @@
 /* Header Without Img */
 .header_withoutImg {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Tags */
 .tag {
-  display: inline-block;
-  padding: 4px 6px;
-  font-size: 13px;
-  line-height: 1em;
-  margin: 0 4px 4px 0;
-  font-weight: 500;
-  border-radius: 4px;
+    display: inline-block;
+    padding: 4px 6px;
+    font-size: 13px;
+    line-height: 1em;
+    margin: 0 4px 4px 0;
+    font-weight: 500;
+    border-radius: 4px;
 }
 .tag_female {
-  color: #fa6482;
-  background: color-mod(#fa6482 alpha(15%));
+    color: #fa6482;
+    background: color-mod(#fa6482 alpha(15%));
 }
 .tag_male {
-  color: #64a9fa;
-  background: color-mod(#64a9fa alpha(15%));
+    color: #64a9fa;
+    background: color-mod(#64a9fa alpha(15%));
 }
 .tag_animal {
-  color: #65cd63;
-  background: color-mod(#65cd63 alpha(15%));
+    color: #65cd63;
+    background: color-mod(#65cd63 alpha(15%));
 }
 .tag_child {
-  color: #feb651;
-  background: color-mod(#feb651 alpha(15%));
+    color: #feb651;
+    background: color-mod(#feb651 alpha(15%));
 }
 .tag_smoke {
-  color: #6a8199;
-  background: color-mod(#6a8199 alpha(15%));
+    color: #6a8199;
+    background: color-mod(#6a8199 alpha(15%));
 }
 .tag_alcohol {
-  color: #7d64fa;
-  background: color-mod(#7d64fa alpha(15%));
+    color: #7d64fa;
+    background: color-mod(#7d64fa alpha(15%));
 }
 .tag_couple {
-  color: #feb651;
-  background: color-mod(#feb651 alpha(15%));
+    color: #feb651;
+    background: color-mod(#feb651 alpha(15%));
 }
 .tag_company {
-  color: #7d64fa;
-  background: color-mod(#7d64fa alpha(15%));
+    color: #7d64fa;
+    background: color-mod(#7d64fa alpha(15%));
 }
 
 /* Info */
 .infoWrapper {
-	display: flex;
-	flex-flow: row wrap;
-	padding: 0 16px 4px;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 16px 4px;
 }
 .infoTags {
-  box-sizing: border-box;
-	flex-basis: 50%;
-	padding-right: 12px;
-	margin-bottom: 8px;
+    box-sizing: border-box;
+    flex-basis: 50%;
+    padding-right: 12px;
+    margin-bottom: 8px;
 }
 .infoTitle {
-	display: block;
-	color: var(--secondary);
-	font-size: 11px;
-	font-weight: 500;
-	line-height: 1.5;
-	text-transform: uppercase;
+    display: block;
+    color: var(--secondary);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: uppercase;
 }
 .infoText {
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 1em;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1em;
 }
