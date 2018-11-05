@@ -1,5 +1,4 @@
 @import '../../styles/_media.css';
-
 .container {
     background: var(--white);
     box-shadow: 0 4px 20px var(--shadow);
@@ -27,7 +26,7 @@
     width: 100%;
     padding: 20px 0 40px;
 }
-.tabs_header > .tabs {
+.tabs_header>.tabs {
     background: var(--light_2);
 }
 .footer {
@@ -49,13 +48,11 @@
         background: var(--border);
     }
 }
-
 @media (--middle-viewport) {
     .container {
         border-radius: 8px;
     }
 }
-
 @media (--big-viewport) {
     .header {
         padding: 12px var(--v-margin_desktop) 12px 12px;

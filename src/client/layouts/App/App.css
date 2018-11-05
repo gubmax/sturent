@@ -1,5 +1,4 @@
 @import '../../styles/_variables.css';
-
 /* Eric Meyers "Reset CSS" */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -17,11 +16,10 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
     font: inherit;
+    font-size: 100%;
     vertical-align: baseline;
 }
-
 /* Base Styles */
 body,
 html {
@@ -40,7 +38,7 @@ a {
     position: relative;
     height: inherit;
     color: var(--primary);
-    font-family: "Roboto", -apple-system, BlinkMacSystemFont,"Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 1.5;
     -webkit-tap-highlight-color: transparent;
@@ -48,7 +46,6 @@ a {
 main {
     padding-top: var(--header-height);
 }
-
 /* Page Loader */
 .pageLoader {
     position: fixed;
@@ -72,7 +69,6 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 /* Loader */
 .loader {
     position: fixed;
@@ -93,16 +89,27 @@ main {
     background: linear-gradient(90deg, var(--red), var(--pink));
     animation: loading 1s linear infinite 1s;
 }
-
 @keyframes loading {
-    from {left: -200px; width: 30%;}
-    50% {width: 30%;}
-    70% {width: 70%;}
-    80% {left: 50%;}
-    95% {left: 120%;}
-    to {left: 100%;}
+    from {
+        left: -200px;
+        width: 30%;
+    }
+    50% {
+        width: 30%;
+    }
+    70% {
+        width: 70%;
+    }
+    80% {
+        left: 50%;
+    }
+    95% {
+        left: 120%;
+    }
+    to {
+        left: 100%;
+    }
 }
-
 /* Page Transition */
 .pageEnter {
     opacity: .01;
@@ -118,7 +125,39 @@ main {
     position: absolute;
     visibility: hidden;
 }
-
+/* Sidebar Transition */
+.sidebarEnter {
+    opacity: 0.01;
+    &.sidebarEnterActive {
+        opacity: 1;
+        transition: opacity .25s;
+    }
+    &>div {
+        opacity: 0.01;
+        transform: translateX(-100%);
+    }
+    &.sidebarEnterActive>div {
+        opacity: 1;
+        transform: translateX(0);
+        transition: transform .25s ease, opacity .25s;
+    }
+}
+.sidebarExit {
+    opacity: 1;
+    &.sidebarExitActive {
+        opacity: 0.01;
+        transition: opacity .2s;
+    }
+    &>div {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    &.sidebarExitActive>div {
+        opacity: 0.01;
+        transform: translateX(-100%);
+        transition: transform .2s ease, opacity .2s;
+    }
+}
 /* Modal Transition */
 .modalEnter {
     opacity: 0.01;
@@ -126,7 +165,7 @@ main {
         opacity: 1;
         transition: opacity .4s;
     }
-    &.modalEnterActive + div {
+    &.modalEnterActive+div {
         top: 0 !important;
         right: 0 !important;
         bottom: 0 !important;
@@ -141,42 +180,8 @@ main {
         opacity: 0.01;
         transition: opacity .4s;
     }
-    &.modalExitActive + div {
+    &.modalExitActive+div {
         overflow: hidden !important;
         border-radius: 8px !important;
-    }
-}
-
-/* Sidebar Transition */
-.sidebarEnter {
-    opacity: 0.01;
-    &.sidebarEnterActive {
-        opacity: 1;
-        transition: opacity .25s;
-    }
-    & > div {
-        opacity: 0.01;
-        transform: translateX(-100%);
-    }
-    &.sidebarEnterActive > div {
-        opacity: 1;
-        transform: translateX(0);
-        transition: transform .25s ease, opacity .25s;
-    }
-}
-.sidebarExit {
-    opacity: 1;
-    &.sidebarExitActive {
-        opacity: 0.01;
-        transition: opacity .2s;
-    }
-    & > div {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    &.sidebarExitActive > div {
-        opacity: 0.01;
-        transform: translateX(-100%);
-        transition: transform .2s ease, opacity .2s;
     }
 }

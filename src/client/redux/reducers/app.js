@@ -1,10 +1,11 @@
-const initialState = {
-	showPageLoader: false
-}
+const initialState = { showPageLoader: false }
 
 export default (state = initialState, action) => {
-	if (action.type === 'APP_TOGGLE_PAGE_LOADER') {
-		return { ...state, showPageLoader: !state.showPageLoader }
-	}
-	return state
+    switch (action.type) {
+    case 'APP_SHOW_PAGE_LOADER':
+        return { ...state, showPageLoader: true }
+    case 'APP_HIDE_PAGE_LOADER':
+        return { ...state, showPageLoader: false }
+    default: return state
+    }
 }

@@ -5,15 +5,13 @@ import { createLocation } from 'history'
 
 import routes from '../routes'
 import { getStore } from '../createStore'
-import { togglePageLoader } from '../redux/actions/appActions'
+import { showPageLoader, hidePageLoader } from '../redux/actions/appActions'
 
-const isModifiedEvent = (e) => {
-    !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
-}
+const isModifiedEvent = e => !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
 
 function handleClick(e) {
     if (this.props.onClick) this.props.onClick(e)
-    debugger
+
     if (
         !e.defaultPrevented
         && e.button === 0
@@ -22,28 +20,28 @@ function handleClick(e) {
     ) {
         e.preventDefault()
         const { history } = this.context.router
-
-
         const { replace, to } = this.props
 
         if (history.location.pathname) {
             const routeTo = routes.find(route => (matchPath(to, route) ? route : null))
+            const { showPageLoader, hidePageLoader } = this.props
 
             if (routeTo) {
-                const { togglePageLoader } = this.props
                 const match = matchPath(to, routeTo)
                 const store = getStore()
 
-                togglePageLoader()
+                showPageLoader()
 
                 import(`../pages/${routeTo.componentName}/${routeTo.componentName}`)
                     .then(component => component.default || component)
-                    .then(component => (component.getInitialProps
-                        ? component.getInitialProps({ match, store, dispatch: store.dispatch })
-                        : null))
-                    .then(() => {
-                        togglePageLoader()
-                    })
+                    .then(component => (
+                        component.getInitialProps
+                            ? component.getInitialProps({ match, store, dispatch: store.dispatch })
+                            : null
+                    ))
+                    .then(() => { hidePageLoader() })
+            } else {
+                hidePageLoader()
             }
 
             if (replace) history.replace(to)
@@ -79,6 +77,6 @@ class AsyncLink extends Link {
     }
 }
 
-const mapDispatchToProps = ({ togglePageLoader })
+const mapDispatchToProps = ({ showPageLoader, hidePageLoader })
 
 export default connect(null, mapDispatchToProps)(AsyncLink)

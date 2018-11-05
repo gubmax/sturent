@@ -6,36 +6,33 @@ import routes from '../routes'
 import App from '../layouts/App/App'
 
 class AsyncComponent extends Component {
-    state = { WrapedComponent: null }
+    state = { LoadedComponent: null }
 
-    componentWillMount() {
-        const { name } = this.props
+    componentDidMount() {
+        const { load } = this.props
 
-        import(`../pages/${name}/${name}`).then((WrapedComponent) => {
-            this.setState({ WrapedComponent })
+        load().then((component) => {
+            this.setState({ LoadedComponent: component.default || component })
         })
     }
 
     render() {
-        let { WrapedComponent } = this.state
+        const { LoadedComponent } = this.state
 
-        if (!WrapedComponent) {
-            return null
-        }
-        if (WrapedComponent.default) WrapedComponent = WrapedComponent.default
+        if (!LoadedComponent) return null
 
-        return <WrapedComponent {...this.props} />
+        return <LoadedComponent {...this.props} />
     }
 }
 
 const clientRouter = () => (
     <App>
         {
-            routes.map(props => (
+            routes.map(route => (
                 <Route
-                    key={props.path}
-                    render={() => <AsyncComponent name={props.componentName} />}
-                    {...props}
+                    key={route.path}
+                    render={() => <AsyncComponent load={() => import(`../pages/${route.componentName}/${route.componentName}`)} />}
+                    {...route}
                 />
             ))
             // routes.map(props => {

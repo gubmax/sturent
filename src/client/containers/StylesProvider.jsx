@@ -1,23 +1,25 @@
-import { Component, Children } from 'react'
+import { Children, Component } from 'react'
 import { element, func } from 'prop-types'
 
 class StylesProvider extends Component {
-  static propTypes = {
-    children: element.isRequired,
-    onInsertCss: func.isRequired
-  }
+    static propTypes = {
+        children: element.isRequired,
+        onInsertCss: func.isRequired,
+    }
 
-  static childContextTypes = {
-    insertCss: func.isRequired
-  }
+    static childContextTypes = { insertCss: func.isRequired }
 
-  getChildContext() {
-    return { insertCss: this.props.onInsertCss }
-  }
+    getChildContext() {
+        const { onInsertCss } = this.props
 
-  render() {
-    return Children.only(this.props.children)
-  }
+        return { insertCss: onInsertCss }
+    }
+
+    render() {
+        const { children } = this.props
+
+        return Children.only(children)
+    }
 }
 
 export default StylesProvider

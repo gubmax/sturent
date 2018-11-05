@@ -28,6 +28,7 @@
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "import/no-dynamic-require": 0,
+        "import/no-extraneous-dependencies": 0,
         "indent": ["error", 4],
         "semi": ["error", "never"],
         "quotes": ["error", "single"],

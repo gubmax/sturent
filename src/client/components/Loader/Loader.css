@@ -4,7 +4,7 @@
     width: 36px;
     height: 40px;
     margin: 0 auto;
-    & > .line {
+    &>.line {
         width: 8px;
         position: absolute;
         border-radius: 2px;
@@ -12,15 +12,15 @@
         background: linear-gradient(var(--accent_light), var(--accent));
         box-shadow: 0 1px 4px var(--shadow_accent);
     }
-    & > .line1 {
+    &>.line1 {
         left: 0;
         animation: line-grow .4s ease alternate infinite;
     }
-    & > .line2 {
+    &>.line2 {
         left: 14px;
         animation: line-grow .4s .2s ease alternate infinite;
     }
-    & > .line3 {
+    &>.line3 {
         left: 28px;
         animation: line-grow .4s .4s ease alternate infinite;
     }

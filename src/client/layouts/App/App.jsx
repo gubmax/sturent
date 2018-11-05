@@ -87,7 +87,7 @@ class App extends Component {
                         ? <div className={s.loader} />
                         : null
                 }
-                <Header currLocation={currLocation.pathname} />
+                <Header locationPath={location.pathname} />
 
                 <div className={s.pageLoader + (showPageLoader ? ` ${s.isShow}` : '')}>
                     <Loader className={s.pageLoader__icon} />
@@ -135,7 +135,7 @@ class App extends Component {
                         timeout={{ enter: 250, exit: 200 }}
                     >
                         <Switch location={location}>
-                            <Route path="/sidebar" component={() => <Sidebar currLocation={currLocation.pathname} history={history} />} />
+                            <Route path="/sidebar" render={() => <Sidebar currLocation={currLocation.pathname} />} />
                         </Switch>
                     </CSSTransition>
                 </TransitionGroup>

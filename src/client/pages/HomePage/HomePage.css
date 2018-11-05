@@ -1,5 +1,4 @@
 @import '../../styles/_media.css';
-
 .page {
     background: var(--light);
     overflow: auto;
@@ -94,7 +93,7 @@ h3.title {
     box-shadow: 0 1px 4px var(--shadow);
     overflow: hidden;
 }
-.ad_neighbors__header__avatar > img {
+.ad_neighbors__header__avatar>img {
     width: 52px;
     height: 52px;
 }
@@ -151,9 +150,6 @@ h3.title {
     margin-bottom: 10px;
     background: var(--secondary);
 }
-.textLine:last-of-type {
-    width: 75%;
-}
 .dummy__date,
 .dummy__name,
 .infoText,
@@ -162,6 +158,9 @@ h3.title {
     display: block;
     height: 1em;
     border-radius: 24px;
+}
+.textLine:last-of-type {
+    width: 75%;
 }
 .imgDummy {
     height: 48px;
@@ -176,7 +175,6 @@ img.img {
     padding: 0 12px;
     margin: 0 auto;
 }
-
 @media (--big-viewport) {
     .mission {
         font-size: 40px;

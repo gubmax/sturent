@@ -1,7 +1,6 @@
 .tabs {
     position: relative;
 }
-
 /* Tabs Transition */
 .tabsEnter {
     display: block;

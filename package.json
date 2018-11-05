@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "npm run dev:webpack && npm run start:server",
     "watch": "npm run watch:webpack & npm run watch:server",
-    "start:server": "npm run mongod & babel-node ./src/server/app.js",
-    "watch:server": "npm run mongod & nodemon ./src/server/app.js localhost 8000 --exec babel-node --delay 1",
-    "dev:webpack": "rm -rf ./src/public/js/* && webpack -d --colors --hide-modules",
-    "watch:webpack": "rm -rf ./src/public/js/* && webpack -d --watch --colors --hide-modules",
-    "build:webpack": "rm -rf ./src/public/js/* && NODE_ENV='production' webpack -p --progress --colors",
+    "start:server": "babel-node ./src/server/app.js",
+    "watch:server": "nodemon ./src/server/app.js localhost 8000 --exec babel-node --delay 1",
+    "dev:webpack": "rm -rf ./src/public/js/* && webpack -d --colors --progress --display-modules",
+    "watch:webpack": "rm -rf ./src/public/js/* && webpack -d --watch --colors --progress --display-modules",
+    "build": "rm -rf ./src/public/js/* && NODE_ENV='production' webpack -p --progress --colors",
     "mongod": "rm -rf ./mongodb/* && mongod --config ./mongod.conf",
     "lint": "eslint src/ --ext .js,.jsx --fix; exit 0",
     "stylelint": "stylelint '**/*.css' --fix; exit 0"

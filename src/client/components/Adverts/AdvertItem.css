@@ -1,11 +1,9 @@
 @import '../../styles/_media.css';
-
 .item {
     box-sizing: border-box;
     width: 100%;
     padding: 0 calc(var(--v-margin_mobile) / 2) 20px;
 }
-
 .advert {
     position: relative;
     display: block;
@@ -17,25 +15,21 @@
     cursor: pointer;
     overflow: hidden;
 }
-
 .advert:hover {
     box-shadow: 0 4px 20px var(--shadow_secondary);
 }
-
 .header {
     position: relative;
     height: 200px;
     margin-bottom: 28px;
     background: var(--light);
 }
-
 .img {
     display: block;
     width: 100%;
     height: inherit;
     object-fit: cover;
 }
-
 .imgsCounter {
     position: absolute;
     bottom: 12px;
@@ -46,7 +40,6 @@
     border-radius: 20px;
     pointer-events: none;
 }
-
 .imgsCounter__icon {
     display: inline-block;
     width: 18px;
@@ -54,32 +47,27 @@
     margin-right: 4px;
     vertical-align: middle;
 }
-
 .location {
     margin: 0 16px 12px;
     line-height: 1em;
     font-weight: 500;
     font-size: 16px;
 }
-
 /* Header Without Img */
 .header__icon {
     width: 100px;
     height: 100px;
 }
-
 .header__text {
     color: var(--border);
     font-size: 32px;
     font-weight: 500;
 }
-
 @media (--middle-viewport) {
     .item {
         width: 50%;
     }
 }
-
 @media (--big-viewport) {
     .item {
         width: 33.33%;

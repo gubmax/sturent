@@ -1,5 +1,4 @@
 @import '../../styles/_media.css';
-
 header {
     position: absolute;
     top: 0;
@@ -25,7 +24,6 @@ header {
     flex-flow: row nowrap;
     align-items: center;
 }
-
 /* Btns */
 .btns {
     flex-grow: 1;
@@ -38,7 +36,6 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     width: 44px;
     height: 44px;
     color: var(--white);
@@ -80,12 +77,10 @@ header {
     border-radius: 50%;
     box-shadow: 0 1px 4px var(--shadow);
 }
-
 /* Navigation */
 nav {
     display: none;
 }
-
 /* Counter */
 .counter {
     display: inline-block;
@@ -106,7 +101,6 @@ nav {
     background: linear-gradient(120deg, var(--red), var(--pink));
     color: var(--white);
 }
-
 @media (--big-viewport) {
     /* Navigation */
     .btn_sidebar {

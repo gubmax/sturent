@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { object } from 'prop-types'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import Link from '../../containers/AsyncLink'
@@ -22,7 +23,7 @@ class Sidebar extends Component {
 	}
 
 	onOverlayClick = () => {
-		this.props.history.goBack()
+	 	this.context.router.history.goBack()
 	}
 
 	onSidebarClick = (e) => {
@@ -111,6 +112,10 @@ class Sidebar extends Component {
       </div>
 		)
 	}
+}
+
+Sidebar.contextTypes = {
+  router: object.isRequired
 }
 
 const mapStateToProps = state => ({

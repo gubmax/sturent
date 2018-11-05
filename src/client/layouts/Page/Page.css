@@ -1,5 +1,4 @@
 @import '../../styles/_media.css';
-
 .page {
     background: var(--light);
     padding-bottom: 40px;
@@ -21,7 +20,7 @@
     display: flex;
     justify-content: center;
     flex-basis: 100%;
-    & > a:nth-child(even) {
+    &>a:nth-child(even) {
         margin-left: 20px;
     }
 }
@@ -33,7 +32,6 @@
     font-weight: normal;
     text-align: center;
 }
-
 @media (--big-viewport) {
     .header {
         padding-top: 48px;

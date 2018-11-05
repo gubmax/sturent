@@ -1,38 +1,34 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { withRouter } from 'react-router-dom'
+import { object } from 'prop-types'
 
 import { getAdverts } from '../redux/actions/advertsActions'
 
-function withAdvert(WrapedComponent) {
-  class AsyncComponent extends Component {
-    static async getInitialProps({ dispatch }) {
-      await dispatch(getAdverts())
+function withAdvert(WrappedComponent) {
+    class AsyncComponent extends PureComponent {
+        static async getInitialProps({ dispatch }) {
+            await dispatch(getAdverts())
+        }
+
+        componentWillMount() {
+            const { adverts } = this.props
+            const { history } = this.context.router
+
+            if (!adverts || history.action === 'PUSH') {
+                AsyncComponent.getInitialProps(this.props)
+            }
+        }
+
+        render() {
+            return (<WrappedComponent {...this.props} />)
+        }
     }
 
-    componentWillMount() {
-      const { adverts, history } = this.props
+    AsyncComponent.contextTypes = { router: object.isRequired }
 
-      if (!adverts || history.action === 'PUSH')
-        AsyncComponent.getInitialProps(this.props)
-    }
+    const mapStateToProps = state => ({ adverts: state.adverts.list })
 
-    render() {
-      return (
-        <WrapedComponent {...this.props} />
-      )
-    }
-  }
-
-  const mapStateToProps = state => ({
-  	adverts: state.adverts.list
-  })
-
-  return compose(
-   	withRouter,
-    connect(mapStateToProps)
-  )(AsyncComponent)
+    return connect(mapStateToProps)(AsyncComponent)
 }
 
 export default withAdvert

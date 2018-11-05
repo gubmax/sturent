@@ -7,16 +7,19 @@ import App from '../layouts/App/App'
 const serverRouter = () => (
     <App>
         {
-            routes.map((props) => {
-                const data = props
-                let { component } = data
+            routes.map((route) => {
+                let { component } = route
 
-                component = require(`../pages/${props.componentName}/${props.componentName}`) // eslint-disable-line global-require
+                component = require(`../pages/${route.componentName}/${route.componentName}`) // eslint-disable-line global-require
                 if (component.default) component = component.default
 
-                data.component = component
-
-                return <Route key={data.path} {...data} />
+                return (
+                    <Route
+                        key={route.path}
+                        component={component}
+                        {...route}
+                    />
+                )
             })
         }
     </App>
