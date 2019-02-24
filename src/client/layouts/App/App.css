@@ -122,7 +122,7 @@ main {
     }
 }
 .pageExit {
-    position: absolute;
+    position: absolute !important;
     visibility: hidden;
 }
 /* Sidebar Transition */

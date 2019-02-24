@@ -99,16 +99,20 @@ class App extends Component {
                         classNames={pageClasses}
                         timeout={250}
                     >
-                        <Fragment>
-                            <main>
-                                <Switch location={currLocation}>
-                                    { children }
-                                    <Route path="/auth" render={() => <AuthPage location={currLocation}><Auth /></AuthPage>} />
-                                    <Route component={NotFoundPage} />
-                                </Switch>
-                            </main>
-                            <Footer />
-                        </Fragment>
+                        <main>
+                            <Switch location={currLocation}>
+                                { children }
+                                <Route path="/auth" render={() => <AuthPage location={currLocation}><Auth /></AuthPage>} />
+                                <Route component={NotFoundPage} />
+                            </Switch>
+                        </main>
+                    </CSSTransition>
+                    <CSSTransition
+                        key={currLocation.key + '_'}
+                        classNames={pageClasses}
+                        timeout={250}
+                    >
+                        <Footer />
                     </CSSTransition>
                 </TransitionGroup>
 
