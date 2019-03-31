@@ -229,7 +229,7 @@ class Advert extends Component {
             </span>
 
             <div className={s.userInfo__info}>
-              <span className={s.userInfo__name}>Имя</span>
+              <span className={s.userInfo__name}>{advert.name || ''}</span>
               <span
                 className={
                   s.userInfo__date + (

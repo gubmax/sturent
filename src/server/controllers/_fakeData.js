@@ -1,6 +1,6 @@
 const fakeAdverts = [{
   _id: 'd3kf7c0d',
-  address: { region: 'twts' },
+  address: { region: 'data.address.rooms' },
   latitude: 55,
   longitude: 55,
   rooms: 'data.rooms',
@@ -10,12 +10,14 @@ const fakeAdverts = [{
   text: 'data.text',
   whom: { female: true },
   tags: { child: true },
+  name: 'Алексей',
+  createdAt: new Date(),
 }]
 
 const fakeUsers = [{
   name: 'Алексей',
   favorite_adverts: '',
-  createdAt: '',
+  createdAt: new Date(),
 }]
 
 module.exports = {

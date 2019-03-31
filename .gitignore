@@ -1,9 +1,8 @@
+.vscode
+
 package-lock.json
 
-node_modules/*
-
-mongodb/*
-!mongodb/.gitkeep
+node_modules
 
 src/server/bundle/*
 !src/server/bundle/.gitkeep
