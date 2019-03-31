@@ -8,36 +8,32 @@ import { setActiveTabIndex } from '../../redux/actions/tabsActions'
 import s from './TabsHeader.css'
 
 class TabsHeader extends Component {
-    handleClick(i) {
-        this.props.setActiveTabIndex(i)
-    }
+  handleClick(i) {
+    this.props.setActiveTabIndex(i)
+  }
 
-    renderChildren() {
-        return this.props.children.map((child, i) => cloneElement(child, {
-				key: i,
-				isActive: i === this.props.activeTabIndex,
-				onHandleClick: this.handleClick.bind(this, i)
-			}))
-    }
+  renderChildren() {
+    return this.props.children.map((child, i) => cloneElement(child, {
+      key: i,
+      isActive: i === this.props.activeTabIndex,
+      onHandleClick: this.handleClick.bind(this, i),
+    }))
+  }
 
-    render() {
-        return (
-            <div className={s.header}>
-                { this.renderChildren() }
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className={s.header}>
+        { this.renderChildren() }
+      </div>
+    )
+  }
 }
 
-const mapStateToProps = state => ({
-    activeTabIndex: state.tabs.activeTabIndex,
-})
+const mapStateToProps = state => ({ activeTabIndex: state.tabs.activeTabIndex })
 
-const mapDispatchToProps = ({
-    setActiveTabIndex,
-})
+const mapDispatchToProps = ({ setActiveTabIndex })
 
 export default compose(
-    withStyles(s),
-    connect(mapStateToProps, mapDispatchToProps),
+  withStyles(s),
+  connect(mapStateToProps, mapDispatchToProps),
 )(TabsHeader)

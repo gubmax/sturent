@@ -7,14 +7,14 @@ class Form extends Component {
     children: node,
     className: string,
     method: string.isRequired,
-    action: string.isRequired
+    action: string.isRequired,
   }
 
   componentDidMount() {
     const fields = this.refs.form.getElementsByClassName('field')
-    let values = {}
+    const values = {}
 
-    for (let key in fields) {
+    for (const key in fields) {
       fields[key].onchange = this.handleChange
       values[fields[key].name] = fields[key].value
     }
@@ -23,7 +23,7 @@ class Form extends Component {
   }
 
   handleChange = (e) => {
-    const name = e.target.name
+    const { name } = e.target
     this.setState({ name: e.target.value })
   }
 
@@ -33,23 +33,23 @@ class Form extends Component {
     axios({
       method: this.props.method,
       url: this.props.action,
-      data: this.state
+      data: this.state,
     })
-    .then(res => {
-      console.log(res)
-      console.log(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then((res) => {
+        console.log(res)
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
-	render() {
+  render() {
     const { className, method, action } = this.props
   	return (
       <form role="form" className={className} method={method} action={action} onSubmit={this.handleSubmit} ref="form">
-        {this.props.children}
-      </form>
+      {this.props.children}
+    </form>
     )
   }
 }

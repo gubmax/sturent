@@ -4,9 +4,9 @@ import { withRouter } from 'react-router'
 
 class ModalToggler extends Component {
 	static propTypes = {
-		children: node.isRequired,
-		to: string.isRequired,
-		onClick: func,
+	    children: node.isRequired,
+	    to: string.isRequired,
+	    onClick: func,
 	}
 
   onLinkClick = () => {
@@ -19,18 +19,18 @@ class ModalToggler extends Component {
       pathname: to,
       state: {
         modal: true,
-        position: { top, right, left, bottom, width, height }
-      }
+        position: { top, right, left, bottom, width, height },
+      },
     })
   }
 
-	render() {
-		const { children, to, className } = this.props
+  render() {
+    const { children, to, className } = this.props
 
 	    return (
-	    	<a className={className} to={to} ref="link" onClick={this.onLinkClick}>{ children }</a>
+  <a className={className} to={to} ref="link" onClick={this.onLinkClick}>{ children }</a>
 	    )
-	}
+  }
 }
 
 export default withRouter(ModalToggler)

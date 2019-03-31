@@ -13,57 +13,67 @@ import AppRouter from '../client/routers/serverRouter'
 import StylesProvider from '../client/containers/StylesProvider'
 
 export default function serverRenderer(req, res) {
-    const store = createStore(reducer, applyMiddleware(thunk))
-    const promises = []
-    const componentNames = []
-    const componentsPath = []
+  const store = createStore(reducer, applyMiddleware(thunk))
+  const promises = []
+  const componentNames = []
+  const componentsPath = []
 
-    routes.some((route) => {
-        const match = matchPath(req.path, route)
+  routes.some((route) => {
+    const match = matchPath(req.path, route)
 
-        if (match) {
-            let component = require(`${__dirname}/../client/pages/${route.componentName}/${route.componentName}`)
+    if (match) {
+      let component = require(`${__dirname}/../client/pages/${route.componentName}/${route.componentName}`)
 
-            if (component.default)
-                component = component.default
+      if (component.default) {
+        component = component.default
+      }
 
-            componentNames.push(`pages/${  route.componentName}`)
-            componentsPath.push(route.path)
+      componentNames.push(`pages/${route.componentName}`)
+      componentsPath.push(route.path)
 
-            if (typeof component.getInitialProps === 'function') {
-                promises.push(component.getInitialProps({
-                    req,
-                    res,
-                    match,
-                    store,
-                    dispatch: store.dispatch,
-                }))
-            }
-        }
-        return match
-    })
-
-    if (componentsPath.length === 0 || componentsPath[0] === '*') {
-        res.status(404).sendFile(path.join(__dirname, '../../public/404.html'))
-        return
+      if (typeof component.getInitialProps === 'function') {
+        promises.push(component.getInitialProps({
+          req,
+          res,
+          match,
+          store,
+          dispatch: store.dispatch,
+        }))
+      }
     }
+    return match
+  })
 
-    Promise.all(promises).then((data) => {
-        const css = new Set()
-        const context = { data }
-        const body = renderToString(
-            <Provider store={store}>
-                <StylesProvider onInsertCss={(...styles) => styles.forEach(style => css.add(style._getCss()))}>
-                    <StaticRouter context={context} location={req.url}>
-                        <AppRouter />
-                    </StaticRouter>
-                </StylesProvider>
-            </Provider>,
-        )
-        const preloadedState = store.getState()
+  if (componentsPath.length === 0 || componentsPath[0] === '*') {
+    res.status(404).sendFile(path.join(__dirname, '../../public/404.html'))
+    return
+  }
 
-        res.status(200).send(template({
-body, preloadedState, componentNames, css }),
-        )
-    })
+  Promise.all(promises).then((data) => {
+    const css = new Set()
+    const context = { data }
+    const body = renderToString((
+      <Provider store={store}>
+        <StylesProvider
+          onInsertCss={
+            (...styles) => styles.forEach(style => css.add(style._getCss()))
+          }
+        >
+          <StaticRouter context={context} location={req.url}>
+            <AppRouter />
+          </StaticRouter>
+        </StylesProvider>
+      </Provider>
+    ))
+    const preloadedState = store.getState()
+
+    res.status(200).send(
+      template({
+        body,
+        preloadedState,
+        componentNames,
+        css,
+      }),
+    )
+  })
 }

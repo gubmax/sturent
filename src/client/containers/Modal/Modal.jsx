@@ -1,4 +1,4 @@
-import React, { Component, Children, cloneElement, Fragment }  from 'react'
+import React, { Component, Children, cloneElement, Fragment } from 'react'
 import { node } from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
@@ -12,57 +12,52 @@ import s from './Modal.css'
 import o from '../../styles/Overlay.css'
 
 class Modal extends Component {
-	static propTypes = {
-	  children: node
-	}
+	static propTypes = { children: node }
 
 	componentDidMount() {
-		this.props.showOverlay()
+	    this.props.showOverlay()
 	}
 
 	componentWillUnmount() {
-		this.props.hideOverlay()
+	    this.props.hideOverlay()
 	}
 
 	onOverlayClick = () => {
-		this.props.history.goBack()
+	    this.props.history.goBack()
 	}
 
-	onModalClick = (e) =>{
-		e.stopPropagation()
+	onModalClick = (e) => {
+	    e.stopPropagation()
 	}
 
 	render() {
-		const { children, style } = this.props
-		const { appear } = this.props
+	    const { children, style } = this.props
+	    const { appear } = this.props
 
-		const childrenWithProps = Children.map(children, child =>
-      cloneElement(child, { onClick: this.onOverlayClick }))
+	    const childrenWithProps = Children.map(children, child => cloneElement(child, { onClick: this.onOverlayClick }))
 
-		return (
-			<Fragment>
+	    return (
+  <Fragment>
 	      <div className={o.overlay} />
-				<div className={s.container} style={style} onClick={this.onOverlayClick}>
-					<div className={s.modal} onClick={this.onModalClick}>
-						{ childrenWithProps }
-					</div>
-				</div>
-			</Fragment>
-		)
+  <div className={s.container} style={style} onClick={this.onOverlayClick}>
+  <div className={s.modal} onClick={this.onModalClick}>
+  { childrenWithProps }
+	        </div>
+	      </div>
+	    </Fragment>
+	    )
 	}
 }
 
-const mapStateToProps = state => ({
-  overlay: state.overlay
-})
+const mapStateToProps = state => ({ overlay: state.overlay })
 
 const mapDispatchToProps = ({
-	showOverlay,
-	hideOverlay
+  showOverlay,
+  hideOverlay,
 })
 
 export default compose(
-	withRouter,
-	withStyles(s, o),
-	connect(mapStateToProps, mapDispatchToProps)
+  withRouter,
+  withStyles(s, o),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Modal)

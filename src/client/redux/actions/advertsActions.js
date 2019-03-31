@@ -1,30 +1,26 @@
 import axios from 'axios'
-import { API_PREFIX } from '../../../etc/config.json'
+import { SERVER_PORT, API_PREFIX } from '../../../etc/config.json'
 
-export function getAdverts() {
-  return dispatch => {
-    return axios(API_PREFIX + '/rent/adverts').then(
-      done => dispatch({ type: 'ADVERTS_REQUEST_SUCCESS', payload: done.data }),
-      error => dispatch({ type: 'ADVERTS_REQUEST_FAILURE', error }),
-    )
-  }
-}
+axios.defaults.baseURL = `http://localhost:${SERVER_PORT}`
 
-export function getCurrAdvert(id) {
-  return dispatch => {
-    return axios(API_PREFIX + '/neighbors/' + id).then(
-      done => dispatch({ type: 'CURR_ADVERT_REQUEST_SUCCESS', payload: done.data }),
-      error => dispatch({ type: 'CURR_ADVERT_REQUEST_FAILURE', error }),
-    )
-  }
-}
+export const getAdverts = () => dispatch => (
+  axios(`${API_PREFIX}/neighbors`).then(
+    done => dispatch({ type: 'ADVERTS_REQUEST_SUCCESS', payload: done.data }),
+    error => dispatch({ type: 'ADVERTS_REQUEST_FAILURE', error }),
+  )
+)
+
+export const getCurrAdvert = id => dispatch => (
+  axios(`${API_PREFIX}/neighbors/${id}`).then(
+    done => dispatch({ type: 'CURR_ADVERT_REQUEST_SUCCESS', payload: done.data }),
+    error => dispatch({ type: 'CURR_ADVERT_REQUEST_FAILURE', error }),
+  )
+)
 
 
-export const setCurrAdvert = (advert) => ({
+export const setCurrAdvert = advert => ({
   type: 'CURR_ADVERT_SET',
-  payload: advert
+  payload: advert,
 })
 
-export const removeCurrAdvert = () => ({
-  type: 'CURR_ADVERT_REMOVE'
-})
+export const removeCurrAdvert = () => ({ type: 'CURR_ADVERT_REMOVE' })

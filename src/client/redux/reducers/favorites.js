@@ -1,26 +1,25 @@
 const initialState = {
-	counter: 0,
-	list: []
+  counter: 0,
+  list: [],
 }
 
 export default (state = initialState, action) => {
-	if (action.type === 'FAVORITES_TOGGLE') {
-		let list = state.list,
-				counter = state.counter
+  if (action.type === 'FAVORITES_TOGGLE') {
+    const { list } = state
+    let { counter } = state
 
-		const id = action.payload,
-					pos = list.indexOf(id)
+    const id = action.payload
+    const pos = list.indexOf(id)
 
-		if (pos !== -1) {
-			list.splice(pos, 1)
-			counter--
-		}
-		else {
-			list.push(id)
-			counter++
-		}
+    if (pos !== -1) {
+      list.splice(pos, 1)
+      counter--
+    } else {
+      list.push(id)
+      counter++
+    }
 
-		return { ...state, counter: counter, list: list }
-	}
-	return state
+    return { ...state, counter, list }
+  }
+  return state
 }

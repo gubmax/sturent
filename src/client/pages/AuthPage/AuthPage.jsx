@@ -5,16 +5,15 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import Page from '../../layouts/Page/Page'
 
 class AuthPage extends Component {
-  static propTypes = {
-    children: node
-  }
+  static propTypes = { children: node }
 
   render() {
   	return (
-      <Page title='Авторизация'
-        withoutWrapper={true}
-        content={this.props.children}
-      />
+      <Page
+      title="Авторизация"
+      withoutWrapper
+      content={this.props.children}
+    />
   	)
   }
 }

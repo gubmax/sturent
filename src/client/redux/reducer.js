@@ -8,10 +8,10 @@ import adverts from './reducers/adverts'
 import tabs from './reducers/tabs'
 
 export default combineReducers({
-    app,
-    user,
-    favorites,
-    overlay,
-    adverts,
-    tabs,
+  app,
+  user,
+  favorites,
+  overlay,
+  adverts,
+  tabs,
 })

@@ -13,18 +13,24 @@ delete window.PRELOADED_STATE
 const store = createStore(preloadedState)
 
 const insertCss = (...styles) => {
-    const removeCss = styles.map(x => x._insertCss())
-    return () => {
-        removeCss.forEach(f => f())
-    }
+  const removeCss = styles.map(x => x._insertCss())
+  return () => {
+    removeCss.forEach(f => f())
+  }
 }
 
-hydrate((<Provider store={store}>
-    <StylesProvider onInsertCss={insertCss}>
+hydrate(
+  (
+    <Provider store={store}>
+      <StylesProvider onInsertCss={insertCss}>
         <BrowserRouter>
-            <AppRouter />
+          <AppRouter />
         </BrowserRouter>
-    </StylesProvider>
-</Provider>), document.getElementById('root'), () => {
+      </StylesProvider>
+    </Provider>
+  ),
+  document.getElementById('root'),
+  () => {
     document.getElementById('css').remove()
-})
+  },
+)

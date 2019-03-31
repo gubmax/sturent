@@ -14,15 +14,13 @@ function withAdvert(WrapedComponent) {
     componentWillMount() {
       const { advert, history } = this.props
 
-      if (!advert || history.action === 'PUSH')
-        AsyncComponent.getInitialProps(this.props)
+      if (!advert || history.action === 'PUSH') AsyncComponent.getInitialProps(this.props)
     }
 
     componentWillUnmount() {
       const { dispatch, history } = this.props
 
-      if (history.action === 'POP')
-        dispatch(removeCurrAdvert())
+      if (history.action === 'POP') dispatch(removeCurrAdvert())
     }
 
     render() {
@@ -32,13 +30,11 @@ function withAdvert(WrapedComponent) {
     }
   }
 
-  const mapStateToProps = state => ({
-  	advert: state.adverts.current
-  })
+  const mapStateToProps = state => ({ advert: state.adverts.current })
 
   return compose(
     withRouter,
-    connect(mapStateToProps)
+    connect(mapStateToProps),
   )(AsyncComponent)
 }
 

@@ -8,87 +8,90 @@ import Loader from '../Loader/Loader'
 import s from './AdvertsList.css'
 
 class AdvertsList extends Component {
-	state = {
-		items: this.props.items,
-		skip: this.itemsCount,
-		loading: false,
-		isLast: false
-	}
+    state = {
+      items: this.props.items,
+      skip: this.itemsCount,
+      loading: false,
+      isLast: false,
+    }
 
-	get itemsCount() {
-		const { items } = this.props
-		return items ? items.length : null
-	}
+    componentDidMount() {
+      if (this.itemsCount) {
+        window.addEventListener('scroll', this.onScroll)
+      }
+    }
 
-	componentDidMount() {
-		if (this.itemsCount) {
-			window.addEventListener('scroll', this.onScroll)
-		}
-	}
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.onScroll)
+    }
 
-	componentWillUnmount() {
-		window.removeEventListener('scroll', this.onScroll)
-	}
+    get itemsCount() {
+      const { items } = this.props
+      return items ? items.length : null
+    }
 
-	onScroll = () => {
-    	const { loading, skip, items, isLast } = this.state
-		let clientHeight = document.body.clientHeight,
-			listBottom = this.refs.list.getBoundingClientRect().bottom
+    onScroll = () => {
+      const { loading, skip, items } = this.state
+      const { clientHeight } = document.body
+      const listBottom = this.refs.list.getBoundingClientRect().bottom
 
-		if (listBottom - 200 > clientHeight || loading) return
+      if (listBottom - 200 > clientHeight || loading) return
 
-		this.setState({ loading: true })
+      this.setState({ loading: true })
 
-		axios(`${this.props.url}?skip=${skip}`).then(
-			done => {
-				let data = done.data
+      const { url } = this.props
 
-				if (!data.length) {
-					window.removeEventListener('scroll', this.onScroll)
-					this.setState({ isLast: true })
-				}
+      axios(`${url}?skip=${skip}`).then(
+        (done) => {
+          let { data } = done
 
-				data = [...items, ...data]
+          if (!data.length) {
+            window.removeEventListener('scroll', this.onScroll)
+            this.setState({ isLast: true })
+          }
 
-				this.setState({
-					items: data,
-					skip: data.length,
-					loading: false
-				})
-			},
-			error => {
-				console.error(error)
-			}
-		)
-	}
+          data = [...items, ...data]
 
-	render() {
-    const { loading, items, isLast } = this.state
+          this.setState({
+            items: data,
+            skip: data.length,
+            loading: false,
+          })
 
-		return (
-			<div className={s.list} ref="list">
-				<div className={s.container}>
-			    	{
-						items && items.length
-							? items.map((child, i) => {
-								return <AdvertItem key={i} item={child} />
-							})
-							: <span className={s.msg}>Объявления не найдены</span>
-					}
-				</div>
-				{
-					loading
-					  ? <Loader className={s.loader}/>
-					  : null
-				}
-				{
-					isLast
-					  ? <span className={s.msg}>Объявления закончились</span>
-					  : null
-				}
-			</div>
-		)
-	}
+          return true
+        },
+        (error) => {
+          console.error(error)
+          return false
+        },
+      )
+    }
+
+    render() {
+      const { loading, items, isLast } = this.state
+
+      return (
+        <div className={s.list} ref="list">
+          <div className={s.container}>
+            {
+              items && items.length
+                ? items.map(child => <AdvertItem key={child._id} item={child} />)
+                : <span className={s.msg}>Объявления не найдены</span>
+            }
+          </div>
+          {
+            loading
+              ? <Loader className={s.loader} />
+              : null
+          }
+          {
+            isLast
+              ? <span className={s.msg}>Объявления закончились</span>
+              : null
+          }
+        </div>
+      )
+    }
 }
 
-export default withStyles(s)(AdvertsList);
+export default withStyles(s)(AdvertsList)

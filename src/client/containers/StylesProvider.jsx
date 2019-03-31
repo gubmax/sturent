@@ -3,22 +3,22 @@ import { element, func } from 'prop-types'
 
 class StylesProvider extends Component {
     static propTypes = {
-        children: element.isRequired,
-        onInsertCss: func.isRequired,
+      children: element.isRequired,
+      onInsertCss: func.isRequired,
     }
 
     static childContextTypes = { insertCss: func.isRequired }
 
     getChildContext() {
-        const { onInsertCss } = this.props
+      const { onInsertCss } = this.props
 
-        return { insertCss: onInsertCss }
+      return { insertCss: onInsertCss }
     }
 
     render() {
-        const { children } = this.props
+      const { children } = this.props
 
-        return Children.only(children)
+      return Children.only(children)
     }
 }
 

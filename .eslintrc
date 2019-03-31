@@ -3,7 +3,7 @@
         "browser": true,
         "node": true,
         "commonjs": true,
-        "es6": true,
+        "es6": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
@@ -25,11 +25,11 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-indent": ["error", 2],
+        "react/jsx-indent-props": ["error", 2],
         "import/no-dynamic-require": 0,
         "import/no-extraneous-dependencies": 0,
-        "indent": ["error", 4],
+        "indent": ["error", 2],
         "semi": ["error", "never"],
         "quotes": ["error", "single"],
         "object-curly-spacing": ["error", "always"],

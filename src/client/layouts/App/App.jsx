@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -20,140 +20,143 @@ import s from './App.css'
 
 class ModalCSSTransition extends CSSTransition {
     onEntered = (node) => {
-        if (!node) return
-        node.nextSibling.style.overflow = 'auto'
+      if (!node) return
+      node.nextSibling.style.overflow = 'auto'
     }
 }
 
 class App extends Component {
     state = { loading: true }
 
+    prevLocation = this.props.location
+
     componentDidMount() {
-        this.setState({ loading: false })
+      this.setState({ loading: false })
     }
 
     componentWillReceiveProps() {
-        const { location } = this.props
+      const { location } = this.props
 
-        if (!location.state) {
-            this.prevLocation = location
-        }
+      if (!location.state) {
+        this.prevLocation = location
+      }
     }
 
     componentDidUpdate() {
-        const hash = this.props.location.hash.replace('#', '')
-        if (hash) {
-            const el = document.getElementById(hash)
-            if (el) el.scrollIntoView()
-        }
+      const hash = this.props.location.hash.replace('#', '')
+      if (hash) {
+        const el = document.getElementById(hash)
+        if (el) el.scrollIntoView()
+      }
     }
 
     render() {
-        const {
-            location, history, children, showPageLoader,
-        } = this.props
+      const {
+        location,
+        history,
+        children,
+        showPageLoader,
+      } = this.props
 
-        const isModal = !!(
-            history.action !== 'POP'
-			&& location.state
-			&& (location.state.modal || location.state.sidebar)
-        )
-        const currLocation = isModal || showPageLoader ? this.prevLocation : location
-        const pos = isModal ? location.state.position : {}
+      const isModal = !!(
+        history.action !== 'POP'
+            && location.state
+            && (location.state.modal || location.state.sidebar)
+      )
+      const currLocation = isModal || showPageLoader ? this.prevLocation : location
+      const pos = isModal ? location.state.position : {}
 
-        const pageClasses = {
-            enter: s.pageEnter,
-            enterActive: s.pageEnterActive,
-            exit: s.pageExit,
-            exitActive: s.pageExitActive,
-        }
-        const modalClasses = {
-            enter: s.modalEnter,
-            enterActive: s.modalEnterActive,
-            exit: s.modalExit,
-            exitActive: s.modalExitActive,
-        }
-        const sidebarClasses = {
-            enter: s.sidebarEnter,
-            enterActive: s.sidebarEnterActive,
-            exit: s.sidebarExit,
-            exitActive: s.sidebarExitActive,
-        }
+      const pageClasses = {
+        enter: s.pageEnter,
+        enterActive: s.pageEnterActive,
+        exit: s.pageExit,
+        exitActive: s.pageExitActive,
+      }
+      const modalClasses = {
+        enter: s.modalEnter,
+        enterActive: s.modalEnterActive,
+        exit: s.modalExit,
+        exitActive: s.modalExitActive,
+      }
+      const sidebarClasses = {
+        enter: s.sidebarEnter,
+        enterActive: s.sidebarEnterActive,
+        exit: s.sidebarExit,
+        exitActive: s.sidebarExitActive,
+      }
 
-        return (
-            <div id={s.app}>
-                {
-                    this.state.loading
-                        ? <div className={s.loader} />
-                        : null
-                }
-                <Header locationPath={location.pathname} />
+      return (
+        <div id={s.app}>
+          {
+            this.state.loading
+              ? <div className={s.loader} />
+              : null
+          }
+          <Header locationPath={location.pathname} />
 
-                <div className={s.pageLoader + (showPageLoader ? ` ${s.isShow}` : '')}>
-                    <Loader className={s.pageLoader__icon} />
-                </div>
+          <div className={s.pageLoader + (showPageLoader ? ` ${s.isShow}` : '')}>
+            <Loader className={s.pageLoader__icon} />
+          </div>
 
-                <TransitionGroup component={null}>
-                    <CSSTransition
-                        key={currLocation.key}
-                        classNames={pageClasses}
-                        timeout={250}
-                    >
-                        <main>
-                            <Switch location={currLocation}>
-                                { children }
-                                <Route path="/auth" render={() => <AuthPage location={currLocation}><Auth /></AuthPage>} />
-                                <Route component={NotFoundPage} />
-                            </Switch>
-                        </main>
-                    </CSSTransition>
-                    <CSSTransition
-                        key={currLocation.key + '_'}
-                        classNames={pageClasses}
-                        timeout={250}
-                    >
-                        <Footer />
-                    </CSSTransition>
-                </TransitionGroup>
+          <TransitionGroup component={null}>
+            <CSSTransition
+              key={currLocation.key}
+              classNames={pageClasses}
+              timeout={250}
+            >
+              <main>
+                <Switch location={currLocation}>
+                  {children}
+                  <Route path="/auth" render={() => <AuthPage location={currLocation}><Auth /></AuthPage>} />
+                  <Route component={NotFoundPage} />
+                </Switch>
+              </main>
+            </CSSTransition>
+            <CSSTransition
+              key={`${currLocation.key}_`}
+              classNames={pageClasses}
+              timeout={250}
+            >
+              <Footer />
+            </CSSTransition>
+          </TransitionGroup>
 
-                <TransitionGroup component={null}>
-                    <ModalCSSTransition
-                        key={location.key}
-                        classNames={modalClasses}
-                        timeout={400}
-                        unmountOnExit
-                    >
-                        <Switch location={isModal ? location : {}}>
-                            <Route path="/auth" component={() => <Modal style={pos}><ModalAuth history={history} /></Modal>} />
-                            <Route path="/neighbors/filters" exact component={() => <Modal style={pos} />} />
-                            <Route path="/neighbors/:id" component={({ match }) => <Modal style={pos}><Advert match={match} /></Modal>} />
-                            <Route path="/rent/filters" component={() => <Modal style={pos} />} />
-                        </Switch>
-                    </ModalCSSTransition>
-                </TransitionGroup>
+          <TransitionGroup component={null}>
+            <ModalCSSTransition
+              key={location.key}
+              classNames={modalClasses}
+              timeout={400}
+              unmountOnExit
+            >
+              <Switch location={isModal ? location : {}}>
+                <Route path="/auth" component={() => <Modal style={pos}><ModalAuth history={history} /></Modal>} />
+                <Route path="/neighbors/filters" exact component={() => <Modal style={pos} />} />
+                <Route path="/neighbors/:id" component={({ match }) => <Modal style={pos}><Advert match={match} /></Modal>} />
+                <Route path="/rent/filters" component={() => <Modal style={pos} />} />
+              </Switch>
+            </ModalCSSTransition>
+          </TransitionGroup>
 
-                <TransitionGroup component={null}>
-                    <CSSTransition
-                        key={location.key}
-                        classNames={sidebarClasses}
-                        timeout={{ enter: 250, exit: 200 }}
-                    >
-                        <Switch location={location}>
-                            <Route path="/sidebar" render={() => <Sidebar currLocation={currLocation.pathname} />} />
-                        </Switch>
-                    </CSSTransition>
-                </TransitionGroup>
-            </div>
-        )
+          <TransitionGroup component={null}>
+            <CSSTransition
+              key={location.key}
+              classNames={sidebarClasses}
+              timeout={{ enter: 250, exit: 200 }}
+            >
+              <Switch location={location}>
+                <Route path="/sidebar" render={() => <Sidebar currLocation={currLocation.pathname} />} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        </div>
+      )
     }
 }
 
-const mapStateToProps = state => ({
-    showPageLoader: state.app.showPageLoader,
-})
+const mapStateToProps = state => ({ showPageLoader: state.app.showPageLoader })
 
 export default compose(
-    connect(mapStateToProps),
-    withRouter,
-    withStyles(s),
+  connect(mapStateToProps),
+  withRouter,
+  withStyles(s),
 )(App)

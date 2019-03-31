@@ -1,33 +1,36 @@
 export default ({
-    body, preloadedState, componentNames, css,
+  body,
+  preloadedState,
+  componentNames,
+  css,
 }) => `
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<meta name="theme-color" content="#4d67d2">
-	<!-- Apple -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="#4d67d2">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#4d67d2">
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#4d67d2">
 
-	<title>STURENT</title>
+    <title>STURENT</title>
 
-	<!-- JavaScripts -->
-	<script type="text/javascript" id="state">
-		window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
-		document.getElementById('state').remove();
-	</script>
-	<script type="text/javascript" src="/js/common.bundle.js" async></script>
-	${componentNames ? (componentNames.map(componentName => `<script type="text/javascript" src="/js/${componentName}.js" async></script>`)) : ''}
-	<!-- Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500;subset=cyrillic" rel="stylesheet">
-	<!-- Styles -->
-	<style type="text/css" id="css">${[...css].join('')}</style>
+    <!-- JavaScripts -->
+    <script type="text/javascript" id="state">
+        window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};
+        document.getElementById('state').remove();
+    </script>
+    <script type="text/javascript" src="/js/common.bundle.js" async></script>
+    ${componentNames ? (componentNames.map(componentName => `<script type="text/javascript" src="/js/${componentName}.js" async></script>`)) : ''}
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500;subset=cyrillic" rel="stylesheet">
+    <!-- Styles -->
+    <style type="text/css" id="css">${[...css].join('')}</style>
 </head>
 <body>
-	<!-- App -->
-	<div id="root">${body}</div>
+    <!-- App -->
+    <div id="root">${body}</div>
 </body>
 </html>
 `

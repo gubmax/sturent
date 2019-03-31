@@ -10,42 +10,41 @@ import s from './Tabs.css'
 class Tabs extends Component {
   static propTypes = {
     children: node,
-    activeTabIndex: number
+    activeTabIndex: number,
   }
 
   renderActiveTabContent() {
-     const { children, activeTabIndex } = this.props
+    const { children, activeTabIndex } = this.props
 
-     if(children[activeTabIndex])
-         return children[activeTabIndex].props.children
-   }
+    if (children[activeTabIndex]) return children[activeTabIndex].props.children
+  }
 
-	render() {
+  render() {
     const tabsClasses = {
       enter: s.tabsEnter,
       enterActive: s.tabsEnterActive,
       exit: s.tabsExit,
-      exitActive: s.tabsExitActive
+      exitActive: s.tabsExitActive,
     }
 
-		return (
+    return (
       <TransitionGroup className={s.tabs}>
-        <CSSTransition key={this.props.activeTabIndex}
+        <CSSTransition
+          key={this.props.activeTabIndex}
           classNames={tabsClasses}
           timeout={250}
-          unmountOnExit>
-            { this.renderActiveTabContent() }
+          unmountOnExit
+        >
+          { this.renderActiveTabContent() }
         </CSSTransition>
       </TransitionGroup>
     )
-	}
+  }
 }
 
-const mapStateToProps = state => ({
-	activeTabIndex: state.tabs.activeTabIndex
-})
+const mapStateToProps = state => ({ activeTabIndex: state.tabs.activeTabIndex })
 
 export default compose(
   withStyles(s),
-  connect(mapStateToProps, null)
+  connect(mapStateToProps, null),
 )(Tabs)
