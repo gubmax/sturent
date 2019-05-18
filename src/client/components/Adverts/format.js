@@ -1,4 +1,8 @@
 export const formatRent = (rent) => {
+  if (rent === undefined) {
+    return false
+  }
+
   const rentNames = {
     room: 'Комнату',
     one: 1,
@@ -9,15 +13,11 @@ export const formatRent = (rent) => {
     partOfHouse: 'Часть дома',
   }
 
-  const str = []
   let roomsKey
-  let i = 0
-
-  for (const key in rent) {
-    str[i] = rentNames[key]
-    if (Number.isInteger(str[i])) roomsKey = i
-    i++
-  }
+  const str = rent.map((val, index) => {
+    if (Number.isInteger(rentNames[val])) roomsKey = index
+    return rentNames[val]
+  })
 
   str[roomsKey] += '-комн. кв.'
 

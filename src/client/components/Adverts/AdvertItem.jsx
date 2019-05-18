@@ -80,9 +80,7 @@ class AdvertItem extends Component {
             <div className={c.infoTags}>
               <span className={c.infoTitle}>Арендная плата</span>
               <span className={c.infoText}>
-                {item.pay}
-                {' '}
-руб.
+                {`${item.pay} руб.`}
               </span>
             </div>
             <div className={c.infoTags}>
@@ -91,7 +89,7 @@ class AdvertItem extends Component {
             </div>
             <div className={c.infoTags}>
               <span className={c.infoTitle}>Залог</span>
-              <span className={c.infoText}>{item.pledge ? `${item.pledge}руб.` : 'Без залога'}</span>
+              <span className={c.infoText}>{item.pledge ? `${item.pledge} руб.` : 'Без залога'}</span>
             </div>
           </div>
         </LinkToModal>

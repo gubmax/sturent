@@ -13,7 +13,7 @@ import s from './Advert.css'
 import i from '../../styles/Icon.css'
 
 class Advert extends Component {
-  handleClick() {
+  handleClick = () => {
     const { toggleFavorites, advert } = this.props
 
     toggleFavorites(advert._id)
@@ -164,10 +164,10 @@ class Advert extends Component {
               <span className={c.infoTitle}>Особенности</span>
               {
                 advert.tags
-                  ? Object.keys(advert.tags).map((val, i) => (
+                  ? Object.keys(advert.tags).map(val => (
                     <div
                       className={`${c.tag} ${c[`tag_${val}`]}`}
-                      key={i}
+                      key={val}
                     >
                       {formatVal(val, 'tags')}
                     </div>
@@ -183,7 +183,7 @@ class Advert extends Component {
               <span className={c.infoTitle}>Арендная плата</span>
               <span className={c.infoText}>
                 {advert.pay}
-                            руб.
+                руб.
               </span>
             </div>
             <div className={c.infoTags}>
